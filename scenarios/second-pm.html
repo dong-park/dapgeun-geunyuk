@@ -3,129 +3,162 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>답변근육 — 기능 사용률은 높은데 리텐션은 그대로다</title>
+    <title>
+      답변근육 — 2라운드 — 원복했더니 불만은 줄고 핵심 지표도 줄었다
+    </title>
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <main>
-      <p class="eyebrow">답변근육 · Second Learning Page</p>
-      <a class="button" href="../index.html">← 구독 신청으로</a>
-      <h1>기능 사용률은 높은데 리텐션은 그대로다</h1>
+      <p class="eyebrow">답변근육 · Round 2</p>
+      <a class="button" href="./first-pm.html">← 1라운드로</a>
+      <h1>2라운드 — 원복했더니 불만은 줄고 핵심 지표도 줄었다</h1>
       <p>
-        <span class="tag">PM</span><span class="tag">Retention</span
-        ><span class="tag">중급</span><span class="tag">12분</span>
+        <span class="tag">Round 2</span><span class="tag">PM</span
+        ><span class="tag">Decision Tradeoff</span><span class="tag">중급</span
+        ><span class="tag">12분</span>
       </p>
       <div class="box soft">
-        <strong>Product Manager 두 번째 링크</strong>
+        <strong>Product Manager 2라운드</strong>
         <p>
-          Product Manager의 두 번째 학습페이지입니다. 기능 사용률을 성공으로
-          착각하지 않고, 제품 가치와 장기 지표를 연결하는 연습입니다.
+          이 페이지는 새 페르소나가 아니라,
+          <strong
+            >1라운드 “가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?”를
+            응시한 뒤</strong
+          >
+          이어지는 압박 질문입니다. 1라운드 답변을 더 깊게 검증합니다.
         </p>
       </div>
-      <h2>1. 실제 상황</h2>
+      <h2>0. 1라운드 내 답변 불러오기</h2>
+      <div class="box">
+        <p class="muted">
+          같은 브라우저에서 1라운드 답변을 임시 저장했다면 아래에 불러옵니다.
+          비어 있으면 바로 2라운드 답변부터 써도 됩니다.
+        </p>
+        <textarea
+          id="previous"
+          readonly
+          placeholder="1라운드 저장 답변이 여기에 표시됩니다."
+        ></textarea>
+      </div>
+      <h2>1. 면접관의 추가 상황</h2>
       <div class="box">
         <p>
-          새로운 AI 요약 기능의 클릭률은 48%로 높습니다. 팀은 성공이라고 보고 더
-          많은 AI 기능을 넣자고 합니다. 그런데 4주 리텐션, 유료 전환율, 주간
-          활성일수는 거의 변하지 않았습니다. 일부 사용자는 “처음엔 신기했는데
-          계속 쓰진 않는다”고 말합니다.
+          1라운드에서 온보딩 완료율 하락을 진단했습니다. 팀은 일단 원복했지만 새
+          온보딩에서 좋아졌던 “프로필 완성도”와 “첫 핵심 행동 수행률”도 함께
+          떨어졌습니다. 가입 완료율만 보면 원복이 맞았지만, 장기 활성 가능성은
+          애매해졌습니다.
         </p>
         <p>
-          <strong>질문:</strong> 이 기능을 성공으로 볼지, 다음 투자를 어떻게
-          결정할지 답해보세요.
+          <strong>2라운드 질문:</strong> 원복 이후 다음 제품 결정을 어떻게
+          설계하겠습니까?
         </p>
       </div>
-      <h2>2. 먼저 답해보기</h2>
+      <h2>2. 다시 답해보기</h2>
       <p>
-        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+        1라운드 답변을 방어한다고 생각하고, 추가 조건을 반영해 다시 답해보세요.
       </p>
-      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <textarea id="draft" placeholder="2라운드 답변 초안..."></textarea>
       <div class="btns">
         <button onclick="saveDraft()">임시 저장</button
         ><button onclick="copyFeedbackPrompt()">
-          내 답변 + 첨삭 프롬프트 복사</button
+          1라운드 + 2라운드 첨삭 프롬프트 복사</button
         ><button class="primary" onclick="showAll()">해설 열기</button>
       </div>
-      <h2>3. 자기 점검 Rubric</h2>
+      <h2>3. 2라운드 자기 점검 Rubric</h2>
       <div class="box">
         <label
-          ><input type="checkbox" /> 사용률과 제품 가치 지표를 구분했다.</label
+          ><input type="checkbox" /> 단기 conversion과 장기 activation 지표를
+          분리했다.</label
         ><label
-          ><input type="checkbox" /> novelty effect 가능성을 언급했다.</label
+          ><input type="checkbox" /> 원복을 끝이 아니라 학습 이벤트로
+          다뤘다.</label
         ><label
-          ><input type="checkbox" /> 세그먼트별 반복 사용/과업 성공 여부를
-          확인했다.</label
+          ><input type="checkbox" /> 새 온보딩의 어떤 요소가 긍정/부정인지
+          분해했다.</label
         ><label
-          ><input type="checkbox" /> 추가 투자/개선/축소의 기준을
+          ><input type="checkbox" /> 부분 재도입/세그먼트 실험을
+          제안했다.</label
+        ><label
+          ><input type="checkbox" /> 의사결정 metric hierarchy를
           제시했다.</label
-        ><label
-          ><input type="checkbox" /> 정량 지표와 정성 피드백을 연결했다.</label
         >
       </div>
       <section id="answers" class="answer-block">
         <h2>4. 답변 비교</h2>
         <div class="box bad">
           <strong>약한 답변</strong>
-          <p>클릭률이 높으니 사용자가 좋아하는 기능이고 더 확장해도 됩니다.</p>
+          <p>가입 완료율이 떨어졌으니 원복 유지가 맞습니다.</p>
         </div>
         <div class="box">
           <strong>괜찮은 답변</strong>
           <p>
-            클릭률은 높지만 리텐션 변화가 없으니 반복 사용률과 유료 전환 기여를
-            더 봐야 합니다. 특정 세그먼트에서만 가치가 있는지 확인하겠습니다.
+            원복으로 가입 완료율은 회복됐지만 프로필 완성도는 떨어졌으니, 새
+            온보딩 요소 중 이탈을 만든 부분과 가치를 만든 부분을 나눠 다시
+            실험하겠습니다.
           </p>
         </div>
         <div class="box good">
           <strong>강한 답변</strong>
           <p>
-            기능 사용률은 관심을 보여주지만 제품 가치의 최종 증거는 아닙니다. AI
-            요약이 실제 과업 성공률, 시간 절감, 반복 사용, 유료 전환에
-            기여하는지 봐야 합니다. 초기에는 novelty effect로 클릭이 높을 수
-            있으니 cohort별 2~4주 반복 사용과 세그먼트별 효과를 확인하겠습니다.
-            만약 특정 직군/상황에서만 효과가 크다면 전체 확장보다 그 세그먼트의
-            workflow에 깊게 통합하는 쪽이 낫습니다. 다음 투자는 “AI 기능 추가”가
-            아니라 리텐션/전환을 움직이는 사용 맥락이 검증될 때 하겠습니다.
+            원복은 실패를 덮는 조치가 아니라 리스크를 낮추며 학습을 이어가는
+            결정입니다. 가입 완료율은 입구 지표이고, 프로필 완성도와 첫 핵심
+            행동은 activation quality 지표일 수 있습니다. 새 온보딩을 전체로
+            재도입하지 말고, 이탈을 만든 step과 가치를 만든 prompt를 분해해 부분
+            실험하겠습니다. 예를 들어 필수 입력은 줄이고, 가치 있는 프로필
+            질문은 선택/후행 단계로 옮깁니다. 최종 판단은 완료율, 첫 핵심 행동,
+            1~4주 retention을 계층화해서 보겠습니다.
           </p>
         </div>
-        <h2>5. 면접관 꼬리질문</h2>
+        <h2>5. 추가 꼬리질문</h2>
         <div class="box">
           <ol>
-            <li>클릭률이 높은데 왜 성공이 아닐 수 있나요?</li>
-            <li>리텐션을 움직이기 어려운 초기 기능은 어떻게 평가하나요?</li>
-            <li>정성 인터뷰 5명만으로 방향을 바꿔도 되나요?</li>
+            <li>단기 전환율과 장기 리텐션이 충돌하면 누가 결정하나요?</li>
+            <li>metric hierarchy를 어떻게 정하나요?</li>
+            <li>실험을 더 하면 속도가 느려진다는 비판에는?</li>
           </ol>
         </div>
         <div class="btns">
           <a class="button" href="../index.html#subscribe"
-            >내 프로필에 맞는 다음 링크 받기</a
+            >다른 페르소나로 다시 신청하기</a
           ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
         </div>
       </section>
     </main>
     <script>
+      const previousKey = "draft-first-pm";
       const key = "draft-second-pm";
+      document.getElementById("previous").value =
+        localStorage.getItem(previousKey) || "";
       document.getElementById("draft").value = localStorage.getItem(key) || "";
       function saveDraft() {
         localStorage.setItem(key, document.getElementById("draft").value);
-        alert("브라우저에 임시 저장했어요.");
+        alert("2라운드 답변을 브라우저에 임시 저장했어요.");
       }
       function showAll() {
         document.getElementById("answers").classList.add("show");
       }
       function copyFeedbackPrompt() {
+        const prev = document.getElementById("previous").value.trim();
         const t = document.getElementById("draft").value.trim();
-        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+        const p = `아래 1라운드/2라운드 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 1라운드 답변의 논리, 추가 조건을 반영한 수정 능력, tradeoff, 리스크 대응, 말의 구조야.
 
 [페르소나]
 Product Manager
 
-[시나리오]
-기능 사용률은 높은데 리텐션은 그대로다
+[1라운드 시나리오]
+가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?
 
-[내 답변]
+[1라운드 내 답변]
+${prev}
+
+[2라운드 추가 질문]
+2라운드 — 원복했더니 불만은 줄고 핵심 지표도 줄었다
+
+[2라운드 내 답변]
 ${t}`;
         navigator.clipboard.writeText(p);
-        alert("첨삭 프롬프트를 복사했어요.");
+        alert("2라운드 첨삭 프롬프트를 복사했어요.");
       }
     </script>
   </body>

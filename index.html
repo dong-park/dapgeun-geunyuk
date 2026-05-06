@@ -210,7 +210,7 @@
         </div>
       </form>
       <section id="result" class="result box good">
-        <h2>내 페르소나 첫 번째 학습페이지</h2>
+        <h2>내 페르소나 1라운드 응시 링크</h2>
         <p id="reason"></p>
         <div id="links" class="scenario-list"></div>
         <h3>신청서 복사</h3>
@@ -244,121 +244,121 @@
       const scenarioMap = {
         backend: [
           [
-            "Backend 첫 번째: 재고는 민감한데, 락 없이 큐로 처리한다면?",
-            "큐 기반 직렬화, 멱등성, DB 최종 방어선을 함께 설명하는 연습",
+            "Backend 1라운드: 재고는 민감한데, 락 없이 큐로 처리한다면?",
+            "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.",
             "./scenarios/first-backend.html",
           ],
           [
-            "Backend 두 번째: 캐시를 붙였더니 장애가 더 커졌다",
-            "cache stampede, stale data, invalidation을 방어적으로 설명하는 연습",
-            "./scenarios/second-backend.html",
+            "DB와 이벤트가 갈라지는 순간",
+            "Transactional Outbox로 dual-write 문제를 설명하는 보조 연습",
+            "./scenarios/software-outbox.html",
           ],
           [
-            "DB와 이벤트가 갈라지는 순간",
-            "Transactional Outbox로 dual-write 문제를 설명하는 연습",
-            "./scenarios/software-outbox.html",
+            "재고 1개에 주문 2개가 동시에 들어오면?",
+            "락/조건부 업데이트/큐 기반 직렬화를 비교하는 보조 연습",
+            "./scenarios/stock-concurrency.html",
           ],
         ],
         frontend: [
           [
-            "Frontend 첫 번째: 대시보드가 느려졌는데, 프론트 문제라고 단정해도 될까?",
-            "렌더링/API/번들/사용자 체감 지표를 분해하는 연습",
+            "Frontend 1라운드: 대시보드가 느려졌는데, 프론트 문제라고 단정해도 될까?",
+            "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.",
             "./scenarios/first-frontend.html",
           ],
           [
-            "Frontend 두 번째: 모바일에서만 버튼이 두 번 눌려 결제가 중복됐다",
-            "중복 submit, idempotency key, 처리 중 UX를 함께 설계하는 연습",
-            "./scenarios/second-frontend.html",
+            "느린 대시보드, 어디서부터 볼까?",
+            "프론트엔드/백엔드 경계를 넘는 성능 진단 보조 연습",
+            "./scenarios/frontend-performance.html",
           ],
           [
-            "느린 대시보드, 어디서부터 볼까?",
-            "프론트엔드/백엔드 경계를 넘는 성능 진단 연습",
-            "./scenarios/frontend-performance.html",
+            "가입 완료율이 18% 떨어졌다",
+            "제품 지표 하락을 funnel 관점으로 진단하는 보조 연습",
+            "./scenarios/pm-activation-drop.html",
           ],
         ],
         pm: [
           [
-            "PM 첫 번째: 가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?",
-            "원복/부분 수정/추가 실험을 판단하는 제품 사고 연습",
+            "PM 1라운드: 가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?",
+            "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.",
             "./scenarios/first-pm.html",
           ],
           [
-            "PM 두 번째: 기능 사용률은 높은데 리텐션은 그대로다",
-            "기능 사용률과 제품 가치 지표를 구분하는 연습",
-            "./scenarios/second-pm.html",
+            "실험 결과가 애매할 때",
+            "유의성/비즈니스 임팩트/의사결정 기준을 말하는 보조 연습",
+            "./scenarios/data-abtest.html",
           ],
           [
             "우선순위가 충돌할 때",
-            "이해관계자 조율과 tradeoff 설명 연습",
+            "이해관계자 조율과 tradeoff 설명 보조 연습",
             "./scenarios/behavioral-stakeholder.html",
           ],
         ],
         data: [
           [
-            "Data 첫 번째: A/B 테스트가 애매하게 이겼다면 출시해도 될까?",
-            "p-value, guardrail, 세그먼트, 비즈니스 의사결정을 연결하는 연습",
+            "Data 1라운드: A/B 테스트가 애매하게 이겼다면 출시해도 될까?",
+            "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.",
             "./scenarios/first-data.html",
           ],
           [
-            "Data 두 번째: 대시보드 숫자와 결제 DB 숫자가 다르다",
-            "metric definition, freshness, reconciliation을 진단하는 연습",
-            "./scenarios/second-data.html",
+            "실험 결과가 애매할 때",
+            "유의성/비즈니스 임팩트/의사결정 기준을 말하는 보조 연습",
+            "./scenarios/data-abtest.html",
           ],
           [
-            "실험 결과가 애매할 때",
-            "유의성/비즈니스 임팩트/의사결정 기준을 말하는 연습",
-            "./scenarios/data-abtest.html",
+            "가입 완료율이 18% 떨어졌다",
+            "원인 가설과 데이터 확인 순서를 구조화하는 보조 연습",
+            "./scenarios/pm-activation-drop.html",
           ],
         ],
         design: [
           [
-            "Design 첫 번째: 결제 버튼을 더 눈에 띄게 했더니 CS가 늘었다",
-            "전환율, 신뢰, 오인지표를 함께 보는 UX 판단 연습",
+            "Design 1라운드: 결제 버튼을 더 눈에 띄게 했더니 CS가 늘었다",
+            "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.",
             "./scenarios/first-design.html",
           ],
           [
-            "Design 두 번째: 사용자는 못 찾는데 팀은 ‘화면에 있다’고 말한다",
-            "발견 가능성, 정보 구조, 사용자 신뢰를 설명하는 연습",
-            "./scenarios/second-design.html",
+            "우선순위가 충돌할 때",
+            "이해관계자 조율과 tradeoff 설명 보조 연습",
+            "./scenarios/behavioral-stakeholder.html",
           ],
           [
-            "우선순위가 충돌할 때",
-            "이해관계자 조율과 tradeoff 설명 연습",
-            "./scenarios/behavioral-stakeholder.html",
+            "가입 완료율이 18% 떨어졌다",
+            "제품 지표 하락을 사용자 경험 관점으로 진단하는 보조 연습",
+            "./scenarios/pm-activation-drop.html",
           ],
         ],
         growth: [
           [
-            "Growth 첫 번째: 광고 ROAS는 좋은데 실제 이익이 줄었다면?",
-            "ROAS와 incrementality, 마진, cannibalization을 구분하는 연습",
+            "Growth 1라운드: 광고 ROAS는 좋은데 실제 이익이 줄었다면?",
+            "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.",
             "./scenarios/first-growth.html",
           ],
           [
-            "Growth 두 번째: 가입자는 늘었는데 좋은 고객은 줄었다",
-            "가입 수와 고객 품질, paid conversion, payback을 연결하는 연습",
-            "./scenarios/second-growth.html",
+            "가입 완료율이 18% 떨어졌다",
+            "원인 가설과 데이터 확인 순서를 구조화하는 보조 연습",
+            "./scenarios/pm-activation-drop.html",
           ],
           [
             "실험 결과가 애매할 때",
-            "유의성/비즈니스 임팩트/의사결정 기준을 말하는 연습",
+            "유의성/비즈니스 임팩트/의사결정 기준을 말하는 보조 연습",
             "./scenarios/data-abtest.html",
           ],
         ],
         leadership: [
           [
-            "Leadership 첫 번째: 성과가 낮은 팀원을 도울 때, 어디까지 기다릴까?",
-            "기대치 정렬, 지원, 책임, 팀 공정성을 함께 말하는 연습",
+            "Leadership 1라운드: 성과가 낮은 팀원을 도울 때, 어디까지 기다릴까?",
+            "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.",
             "./scenarios/first-leadership.html",
           ],
           [
-            "Leadership 두 번째: 두 시니어가 서로를 신뢰하지 않는다",
-            "갈등을 목표/역할/의사결정 구조로 풀어내는 연습",
-            "./scenarios/second-leadership.html",
+            "성과가 낮은 팀원을 어떻게 도울까?",
+            "리더십/코칭/기대치 정렬 보조 연습",
+            "./scenarios/leadership-coaching.html",
           ],
           [
-            "성과가 낮은 팀원을 어떻게 도울까?",
-            "리더십/코칭/기대치 정렬 답변 연습",
-            "./scenarios/leadership-coaching.html",
+            "실패한 프로젝트를 설명하라",
+            "회고를 변명이 아니라 학습으로 말하는 보조 연습",
+            "./scenarios/behavioral-failure.html",
           ],
         ],
       };
@@ -427,7 +427,7 @@
         const k = kind(d.role, d.weakness.join(" "), d.target, d.notes);
         const links = scenarioMap[k];
         document.getElementById("reason").textContent =
-          `${d.name}님은 ${d.role} / ${d.years} / ${d.goal} 프로필이고, 약점으로 ${d.weakness.join(", ") || "구조화된 답변"}을 선택했습니다. 그래서 ${trackLabel[k]} 페르소나의 첫 번째 학습페이지를 맨 위에 배치했습니다.`;
+          `${d.name}님은 ${d.role} / ${d.years} / ${d.goal} 프로필이고, 약점으로 ${d.weakness.join(", ") || "구조화된 답변"}을 선택했습니다. 그래서 ${trackLabel[k]} 페르소나의 1라운드 응시 링크를 맨 위에 배치했습니다. 응시 후 페이지 안에서 2라운드로 이어집니다.`;
         document.getElementById("links").innerHTML = links
           .map(
             (x) =>

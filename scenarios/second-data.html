@@ -3,136 +3,151 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>답변근육 — 대시보드 숫자와 결제 DB 숫자가 다르다</title>
+    <title>답변근육 — 2라운드 — 세그먼트에서는 이겼는데 전체에서는 졌다</title>
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <main>
-      <p class="eyebrow">답변근육 · Second Learning Page</p>
-      <a class="button" href="../index.html">← 구독 신청으로</a>
-      <h1>대시보드 숫자와 결제 DB 숫자가 다르다</h1>
+      <p class="eyebrow">답변근육 · Round 2</p>
+      <a class="button" href="./first-data.html">← 1라운드로</a>
+      <h1>2라운드 — 세그먼트에서는 이겼는데 전체에서는 졌다</h1>
       <p>
-        <span class="tag">Data</span><span class="tag">Metric Quality</span
-        ><span class="tag">중급</span><span class="tag">12분</span>
+        <span class="tag">Round 2</span><span class="tag">Data</span
+        ><span class="tag">Experiment</span><span class="tag">중급</span
+        ><span class="tag">12분</span>
       </p>
       <div class="box soft">
-        <strong>Data Analyst / Scientist 두 번째 링크</strong>
+        <strong>Data Analyst / Scientist 2라운드</strong>
         <p>
-          Data Analyst / Scientist의 두 번째 학습페이지입니다. 숫자 차이를 단순
-          SQL 오류가 아니라 정의, 파이프라인, 지연, 중복의 문제로 진단하는
-          연습입니다.
+          이 페이지는 새 페르소나가 아니라,
+          <strong
+            >1라운드 “A/B 테스트가 애매하게 이겼다면 출시해도 될까?”를 응시한
+            뒤</strong
+          >
+          이어지는 압박 질문입니다. 1라운드 답변을 더 깊게 검증합니다.
         </p>
       </div>
-      <h2>1. 실제 상황</h2>
+      <h2>0. 1라운드 내 답변 불러오기</h2>
+      <div class="box">
+        <p class="muted">
+          같은 브라우저에서 1라운드 답변을 임시 저장했다면 아래에 불러옵니다.
+          비어 있으면 바로 2라운드 답변부터 써도 됩니다.
+        </p>
+        <textarea
+          id="previous"
+          readonly
+          placeholder="1라운드 저장 답변이 여기에 표시됩니다."
+        ></textarea>
+      </div>
+      <h2>1. 면접관의 추가 상황</h2>
       <div class="box">
         <p>
-          월 매출 리포트에서 BI 대시보드는 12.4억을 보여주는데, 결제 DB 집계는
-          11.8억입니다. 재무팀은 오늘 숫자를 확정해야 하고, PM은 BI 숫자를
-          기준으로 보고서를 만들었습니다. ETL은 하루 4번 돌고, 환불/부분취소
-          이벤트는 별도 테이블에 있습니다.
+          1라운드에서 애매한 A/B 테스트를 판단했습니다. 이제 추가 분석에서 신규
+          유저는 B안이 크게 이기고, 기존 유저는 B안이 졌습니다. 전체로는 거의
+          차이가 없습니다. PM은 “신규 유저에게만 켜자”고 말합니다.
         </p>
         <p>
-          <strong>질문:</strong> 어떤 순서로 원인을 좁히고, 오늘 어떤 숫자를
-          보고 기준으로 삼겠습니까?
+          <strong>2라운드 질문:</strong> 세그먼트별 출시 결정을 데이터 관점에서
+          어떻게 검증하겠습니까?
         </p>
       </div>
-      <h2>2. 먼저 답해보기</h2>
+      <h2>2. 다시 답해보기</h2>
       <p>
-        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+        1라운드 답변을 방어한다고 생각하고, 추가 조건을 반영해 다시 답해보세요.
       </p>
-      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <textarea id="draft" placeholder="2라운드 답변 초안..."></textarea>
       <div class="btns">
         <button onclick="saveDraft()">임시 저장</button
         ><button onclick="copyFeedbackPrompt()">
-          내 답변 + 첨삭 프롬프트 복사</button
+          1라운드 + 2라운드 첨삭 프롬프트 복사</button
         ><button class="primary" onclick="showAll()">해설 열기</button>
       </div>
-      <h2>3. 자기 점검 Rubric</h2>
+      <h2>3. 2라운드 자기 점검 Rubric</h2>
       <div class="box">
         <label
-          ><input type="checkbox" /> metric definition을 먼저 확인했다.</label
-        ><label
-          ><input type="checkbox" /> 데이터 freshness/ETL 지연을
-          확인했다.</label
-        ><label
-          ><input type="checkbox" /> 환불/취소/중복/타임존을 후보로
-          열었다.</label
-        ><label
-          ><input type="checkbox" /> source of truth와 임시 보고 기준을
+          ><input type="checkbox" /> 사전 가설 세그먼트인지 사후 발견인지
           구분했다.</label
+        ><label><input type="checkbox" /> sample size와 power를 확인했다.</label
+        ><label><input type="checkbox" /> interaction effect를 설명했다.</label
         ><label
-          ><input type="checkbox" /> 재발 방지용 metric contract/test를
-          제안했다.</label
-        >
+          ><input type="checkbox" /> 세그먼트 rollout의 운영 복잡도를
+          언급했다.</label
+        ><label><input type="checkbox" /> 후속 실험 설계를 제안했다.</label>
       </div>
       <section id="answers" class="answer-block">
         <h2>4. 답변 비교</h2>
         <div class="box bad">
           <strong>약한 답변</strong>
-          <p>BI 쿼리가 틀린 것 같으니 SQL을 다시 확인하겠습니다.</p>
+          <p>신규 유저에게서 이겼으니 신규 유저 대상으로 출시하면 됩니다.</p>
         </div>
         <div class="box">
           <strong>괜찮은 답변</strong>
           <p>
-            먼저 매출 정의가 같은지 보고, ETL 지연이나 환불 반영 여부, 타임존
-            차이를 확인하겠습니다. 재무 확정은 결제 원장 기준으로 하는 게
-            안전합니다.
+            신규 유저 효과가 사전에 본 가설인지 확인하고, 표본 수와 신뢰구간을
+            본 뒤 신규 유저 대상 재실험을 제안하겠습니다.
           </p>
         </div>
         <div class="box good">
           <strong>강한 답변</strong>
           <p>
-            숫자 불일치는 SQL 하나의 문제가 아니라 정의와 파이프라인 문제일 수
-            있습니다. 먼저 매출 정의가 gross인지 net인지,
-            환불/부분취소/쿠폰/세금 포함 여부가 같은지 맞춥니다. 그 다음 ETL
-            freshness, 중복 결제 이벤트, 타임존, late-arriving data를
-            확인합니다. 오늘 확정 숫자는 source of truth인 결제 원장 기준으로
-            두고, BI는 차이 원인과 보정 여부를 표시하겠습니다. 재발 방지를 위해
-            metric definition 문서, freshness 알림, reconciliation test를
-            추가하겠습니다.
+            세그먼트 효과는 매력적이지만 사후 분석이면 false positive 위험이
+            큽니다. 먼저 신규/기존 유저 구분이 사전 가설이었는지, 각 세그먼트
+            sample size와 confidence interval이 충분한지, 실제 interaction
+            effect가 있는지 확인합니다. 근거가 약하면 “신규 유저 전면 출시”보다
+            신규 유저 대상 confirmatory experiment나 점진 rollout을 제안합니다.
+            또한 세그먼트별 다른 경험을 운영할 때의 복잡도, 모니터링, 장기
+            지표도 함께 봐야 합니다.
           </p>
         </div>
-        <h2>5. 면접관 꼬리질문</h2>
+        <h2>5. 추가 꼬리질문</h2>
         <div class="box">
           <ol>
-            <li>source of truth는 항상 production DB인가요?</li>
-            <li>
-              late-arriving data가 있으면 대시보드는 어떻게 보여줘야 하나요?
-            </li>
-            <li>재무팀과 PM이 원하는 숫자 정의가 다르면?</li>
+            <li>Simpson’s paradox 가능성은 어떻게 확인하나요?</li>
+            <li>사후 세그먼트 분석을 완전히 버려야 하나요?</li>
+            <li>세그먼트 rollout이 제품 복잡도를 키울 때 판단 기준은?</li>
           </ol>
         </div>
         <div class="btns">
           <a class="button" href="../index.html#subscribe"
-            >내 프로필에 맞는 다음 링크 받기</a
+            >다른 페르소나로 다시 신청하기</a
           ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
         </div>
       </section>
     </main>
     <script>
+      const previousKey = "draft-first-data";
       const key = "draft-second-data";
+      document.getElementById("previous").value =
+        localStorage.getItem(previousKey) || "";
       document.getElementById("draft").value = localStorage.getItem(key) || "";
       function saveDraft() {
         localStorage.setItem(key, document.getElementById("draft").value);
-        alert("브라우저에 임시 저장했어요.");
+        alert("2라운드 답변을 브라우저에 임시 저장했어요.");
       }
       function showAll() {
         document.getElementById("answers").classList.add("show");
       }
       function copyFeedbackPrompt() {
+        const prev = document.getElementById("previous").value.trim();
         const t = document.getElementById("draft").value.trim();
-        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+        const p = `아래 1라운드/2라운드 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 1라운드 답변의 논리, 추가 조건을 반영한 수정 능력, tradeoff, 리스크 대응, 말의 구조야.
 
 [페르소나]
 Data Analyst / Scientist
 
-[시나리오]
-대시보드 숫자와 결제 DB 숫자가 다르다
+[1라운드 시나리오]
+A/B 테스트가 애매하게 이겼다면 출시해도 될까?
 
-[내 답변]
+[1라운드 내 답변]
+${prev}
+
+[2라운드 추가 질문]
+2라운드 — 세그먼트에서는 이겼는데 전체에서는 졌다
+
+[2라운드 내 답변]
 ${t}`;
         navigator.clipboard.writeText(p);
-        alert("첨삭 프롬프트를 복사했어요.");
+        alert("2라운드 첨삭 프롬프트를 복사했어요.");
       }
     </script>
   </body>

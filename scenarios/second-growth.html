@@ -3,126 +3,155 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>답변근육 — 가입자는 늘었는데 좋은 고객은 줄었다</title>
+    <title>
+      답변근육 — 2라운드 — ROAS가 좋은 캠페인을 끄라고 말해야 한다면?
+    </title>
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <main>
-      <p class="eyebrow">답변근육 · Second Learning Page</p>
-      <a class="button" href="../index.html">← 구독 신청으로</a>
-      <h1>가입자는 늘었는데 좋은 고객은 줄었다</h1>
+      <p class="eyebrow">답변근육 · Round 2</p>
+      <a class="button" href="./first-growth.html">← 1라운드로</a>
+      <h1>2라운드 — ROAS가 좋은 캠페인을 끄라고 말해야 한다면?</h1>
       <p>
-        <span class="tag">Growth</span
-        ><span class="tag">Acquisition Quality</span
-        ><span class="tag">중급</span><span class="tag">10분</span>
+        <span class="tag">Round 2</span><span class="tag">Growth</span
+        ><span class="tag">Incrementality</span><span class="tag">중급</span
+        ><span class="tag">10분</span>
       </p>
       <div class="box soft">
-        <strong>Marketer / Growth 두 번째 링크</strong>
+        <strong>Marketer / Growth 2라운드</strong>
         <p>
-          Marketer / Growth의 두 번째 학습페이지입니다. acquisition volume이
-          아니라 고객 품질, payback, retention까지 연결하는 연습입니다.
+          이 페이지는 새 페르소나가 아니라,
+          <strong
+            >1라운드 “광고 ROAS는 좋은데 실제 이익이 줄었다면?”를 응시한
+            뒤</strong
+          >
+          이어지는 압박 질문입니다. 1라운드 답변을 더 깊게 검증합니다.
         </p>
       </div>
-      <h2>1. 실제 상황</h2>
+      <h2>0. 1라운드 내 답변 불러오기</h2>
+      <div class="box">
+        <p class="muted">
+          같은 브라우저에서 1라운드 답변을 임시 저장했다면 아래에 불러옵니다.
+          비어 있으면 바로 2라운드 답변부터 써도 됩니다.
+        </p>
+        <textarea
+          id="previous"
+          readonly
+          placeholder="1라운드 저장 답변이 여기에 표시됩니다."
+        ></textarea>
+      </div>
+      <h2>1. 면접관의 추가 상황</h2>
       <div class="box">
         <p>
-          무료 체험 캠페인 후 가입자는 3배 늘었습니다. 하지만 결제 전환율은
-          절반으로 떨어졌고, CS에는 “무료인 줄 알았다”는 문의가 늘었습니다.
-          광고팀은 CAC가 낮아졌다고 보고 예산 증액을 주장합니다.
+          1라운드에서 ROAS와 실제 이익 차이를 다뤘습니다. 추가로 holdout 비슷한
+          비교를 해보니 광고 노출 그룹의 구매율은 높지만, 비노출 유사 그룹도
+          거의 같은 시점에 구매했습니다. 광고가 원래 살 사람에게 할인 쿠폰만 준
+          것일 수 있습니다.
         </p>
         <p>
-          <strong>질문:</strong> 이 캠페인을 성공으로 볼지, 어떤 데이터를 추가로
-          확인하겠습니까?
+          <strong>2라운드 질문:</strong> 성과가 좋아 보이는 캠페인을 줄이거나
+          끄자는 주장을 어떻게 하겠습니까?
         </p>
       </div>
-      <h2>2. 먼저 답해보기</h2>
+      <h2>2. 다시 답해보기</h2>
       <p>
-        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+        1라운드 답변을 방어한다고 생각하고, 추가 조건을 반영해 다시 답해보세요.
       </p>
-      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <textarea id="draft" placeholder="2라운드 답변 초안..."></textarea>
       <div class="btns">
         <button onclick="saveDraft()">임시 저장</button
         ><button onclick="copyFeedbackPrompt()">
-          내 답변 + 첨삭 프롬프트 복사</button
+          1라운드 + 2라운드 첨삭 프롬프트 복사</button
         ><button class="primary" onclick="showAll()">해설 열기</button>
       </div>
-      <h2>3. 자기 점검 Rubric</h2>
+      <h2>3. 2라운드 자기 점검 Rubric</h2>
       <div class="box">
         <label
-          ><input type="checkbox" /> 가입 수와 qualified user를 구분했다.</label
+          ><input type="checkbox" /> platform ROAS와 incrementality를
+          구분했다.</label
+        ><label><input type="checkbox" /> counterfactual 관점을 설명했다.</label
         ><label
-          ><input type="checkbox" /> CAC뿐 아니라 activation/paid
-          conversion/payback을 봤다.</label
+          ><input type="checkbox" /> 쿠폰 비용/마진/기존 수요 cannibalization을
+          말했다.</label
         ><label
-          ><input type="checkbox" /> 메시지-misfit과 기대치 불일치를
-          언급했다.</label
-        ><label
-          ><input type="checkbox" /> 채널/소재/세그먼트별 품질을 나눴다.</label
-        ><label><input type="checkbox" /> 증액 전 실험 기준을 제시했다.</label>
+          ><input type="checkbox" /> 작은 holdout/geo test를 제안했다.</label
+        ><label><input type="checkbox" /> 팀 설득용 실행안을 제시했다.</label>
       </div>
       <section id="answers" class="answer-block">
         <h2>4. 답변 비교</h2>
         <div class="box bad">
           <strong>약한 답변</strong>
-          <p>가입자가 3배 늘었고 CAC가 낮아졌으니 성공입니다.</p>
+          <p>ROAS가 좋아도 이익이 줄었으니 캠페인을 끄겠습니다.</p>
         </div>
         <div class="box">
           <strong>괜찮은 답변</strong>
           <p>
-            가입자는 늘었지만 결제 전환율이 떨어졌으니 유입 품질을 봐야 합니다.
-            채널별 전환율과 체험 후 결제율을 확인하겠습니다.
+            광고가 증분 구매를 만들었는지 불확실하니 예산을 일부 줄이고 holdout
+            테스트로 incrementality를 확인하겠습니다.
           </p>
         </div>
         <div class="box good">
           <strong>강한 답변</strong>
           <p>
-            이 캠페인은 volume은 키웠지만 좋은 고객을 데려왔는지 아직 모릅니다.
-            CAC가 낮아져도 activation, paid conversion, refund/CS, payback이
-            나빠지면 손해입니다. 특히 “무료인 줄 알았다”는 문의는 소재가 기대를
-            잘못 만들었을 가능성이 큽니다. 채널/소재/세그먼트별로 activation과
-            결제 전환, 4주 retention, CS율을 보고, 메시지를 명확히 한 소재와
-            비교 실험한 뒤 예산 증액을 결정하겠습니다.
+            플랫폼 ROAS는 광고 접촉 후 구매를 잡지만, 그 구매가 광고 때문에
+            생겼는지는 말해주지 않습니다. 원래 살 고객에게 쿠폰만 지급했다면
+            매출은 잡혀도 이익은 줄 수 있습니다. 그래서 전체 중단보다 예산
+            일부를 holdout/geo split으로 남겨 incrementality를 검증하고, 신규
+            고객/고마진 상품/재구매 가능성이 높은 세그먼트로 제한하는 실험을
+            제안하겠습니다. 설득은 “광고를 끄자”가 아니라 “증분 이익이 확인되는
+            곳에 예산을 재배치하자”로 하겠습니다.
           </p>
         </div>
-        <h2>5. 면접관 꼬리질문</h2>
+        <h2>5. 추가 꼬리질문</h2>
         <div class="box">
           <ol>
-            <li>CAC가 낮아졌는데 왜 캠페인을 멈출 수 있나요?</li>
-            <li>좋은 고객의 정의는 누가 정하나요?</li>
-            <li>소재 메시지를 바꾸면 전환율이 떨어질 때 어떻게 판단하나요?</li>
+            <li>완벽한 holdout이 불가능하면 어떤 근사 방법을 쓰나요?</li>
+            <li>광고팀 KPI가 ROAS일 때 어떻게 align하나요?</li>
+            <li>쿠폰 없이 전환율이 떨어지면 어떻게 판단하나요?</li>
           </ol>
         </div>
         <div class="btns">
           <a class="button" href="../index.html#subscribe"
-            >내 프로필에 맞는 다음 링크 받기</a
+            >다른 페르소나로 다시 신청하기</a
           ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
         </div>
       </section>
     </main>
     <script>
+      const previousKey = "draft-first-growth";
       const key = "draft-second-growth";
+      document.getElementById("previous").value =
+        localStorage.getItem(previousKey) || "";
       document.getElementById("draft").value = localStorage.getItem(key) || "";
       function saveDraft() {
         localStorage.setItem(key, document.getElementById("draft").value);
-        alert("브라우저에 임시 저장했어요.");
+        alert("2라운드 답변을 브라우저에 임시 저장했어요.");
       }
       function showAll() {
         document.getElementById("answers").classList.add("show");
       }
       function copyFeedbackPrompt() {
+        const prev = document.getElementById("previous").value.trim();
         const t = document.getElementById("draft").value.trim();
-        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+        const p = `아래 1라운드/2라운드 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 1라운드 답변의 논리, 추가 조건을 반영한 수정 능력, tradeoff, 리스크 대응, 말의 구조야.
 
 [페르소나]
 Marketer / Growth
 
-[시나리오]
-가입자는 늘었는데 좋은 고객은 줄었다
+[1라운드 시나리오]
+광고 ROAS는 좋은데 실제 이익이 줄었다면?
 
-[내 답변]
+[1라운드 내 답변]
+${prev}
+
+[2라운드 추가 질문]
+2라운드 — ROAS가 좋은 캠페인을 끄라고 말해야 한다면?
+
+[2라운드 내 답변]
 ${t}`;
         navigator.clipboard.writeText(p);
-        alert("첨삭 프롬프트를 복사했어요.");
+        alert("2라운드 첨삭 프롬프트를 복사했어요.");
       }
     </script>
   </body>
