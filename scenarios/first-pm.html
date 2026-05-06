@@ -8,92 +8,292 @@
   </head>
   <body>
     <main>
-      <p class="eyebrow">답변근육 · First Learning Page</p>
+      <p class="eyebrow">답변근육 · First Learning Page · Product Manager</p>
       <a class="button" href="../index.html">← 구독 신청으로</a>
       <h1>가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?</h1>
+      <p class="lead">
+        오늘 목표는 “퍼널을 봅니다”라는 말에서 멈추지 않는 것입니다. 지표 하락을
+        정의하고, 원인 후보를 쪼개고, 롤백·부분 완화·추가 실험 사이에서
+        의사결정하는 연습입니다.
+      </p>
       <p>
         <span class="tag">PM</span><span class="tag">Activation</span
-        ><span class="tag">중급</span><span class="tag">12분</span>
+        ><span class="tag">Experiment</span><span class="tag">Funnel</span
+        ><span class="tag">18분</span>
       </p>
+
       <div class="box soft">
         <strong>Product Manager 첫 번째 링크</strong>
         <p>
-          PM으로 구독 신청했을 때 첫 번째로 보내는 학습페이지입니다. 지표 하락을
-          기능 아이디어가 아니라 진단 문제로 다루는 연습입니다.
+          Product Manager에게 첫 번째로 보내는 활성화/퍼널 진단 페이지입니다.
+          전환율 하나만 보고 움직이지 않고 downstream metric과 guardrail까지
+          연결하는 답변을 만듭니다.
         </p>
       </div>
-      <h2>1. 실제 상황</h2>
+
+      <h2>1. 먼저 사고를 터뜨려보자</h2>
       <div class="box">
+        <h3>상황</h3>
         <p>
-          신규 온보딩 개편 후 가입 완료율이 62%에서 44%로 떨어졌습니다. CEO는
-          “온보딩을 원복해야 하는 것 아니냐”고 묻고, 디자인팀은 “아직 학습
-          기간이 부족하다”고 말합니다.
-        </p>
-        <p>
-          <strong>질문:</strong> 바로 원복할지, 더 볼지, 어떤 데이터를 확인할지
-          어떻게 답하겠습니까?
+          신규 가입 플로우 개편 후 가입 완료율이 18% 떨어졌습니다. 하지만 가입한
+          사용자의 첫 결제율은 조금 올랐습니다. 디자인팀은 새 플로우가 더
+          신뢰감을 준다고 보고, 세일즈팀은 리드 수가 줄었다고 불만입니다.
         </p>
       </div>
-      <h2>2. 먼저 답해보기</h2>
+
+      <div class="question">
+        <strong>예측 질문. 가장 먼저 물어야 할 질문은?</strong>
+        <ol>
+          <li>디자인을 바로 원복할까요?</li>
+          <li>가입 완료율 18% 하락이 어느 segment/step에서 발생했나요?</li>
+          <li>첫 결제율이 올랐으니 성공인가요?</li>
+        </ol>
+        <details>
+          <summary>정답 보기</summary>
+          <p>
+            정답은 2번입니다. 전체 전환율 하나로는 판단할 수 없습니다. 유입
+            채널, 디바이스, 신규/기존, 단계별 drop-off, 품질 지표를 함께 봐야
+            합니다.
+          </p>
+        </details>
+      </div>
+
+      <h2>2. 실패 흐름을 타임라인으로 보면 바로 보인다</h2>
+      <table class="trace">
+        <thead>
+          <tr>
+            <th>단계</th>
+            <th>개편 전</th>
+            <th>개편 후</th>
+            <th>해석</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>방문→가입 시작</td>
+            <td>42%</td>
+            <td>41%</td>
+            <td>상단 메시지는 큰 변화 없음</td>
+          </tr>
+          <tr>
+            <td>가입 시작→본인인증</td>
+            <td>80%</td>
+            <td>61%</td>
+            <td>마찰이 생긴 핵심 후보</td>
+          </tr>
+          <tr>
+            <td>본인인증→완료</td>
+            <td>75%</td>
+            <td>73%</td>
+            <td>후반부는 큰 변화 없음</td>
+          </tr>
+          <tr>
+            <td>완료→첫 결제</td>
+            <td>9%</td>
+            <td>12%</td>
+            <td>양질의 가입자는 늘었을 수 있음</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>3. 좋은 답변은 “진단 기준”부터 세운다</h2>
       <p>
-        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+        면접에서 강한 답변은 바로 해결책을 외치지 않습니다. 먼저 어떤 결과가
+        위험한지, 어떤 지표나 증거로 원인을 나눌지, 그리고 어떤 선택지가 어떤
+        비용을 만드는지 설명합니다. 그래야 “그럴듯한 개선안”이 아니라 실제
+        서비스에서 쓸 수 있는 판단으로 들립니다.
       </p>
+
+      <h2>4. 진단 A: North Star와 local metric을 분리한다</h2>
+      <p>
+        가입 완료율은 중요하지만 전체 목적은 활성 사용자나 매출일 수 있습니다.
+        완료율 하락이 나쁘더라도 fraud 감소, 리드 품질 개선, 결제율 상승이 같이
+        있다면 단순 원복은 답이 아닐 수 있습니다.
+      </p>
+
+      <h2>5. 진단 B: Segment와 step으로 쪼갠다</h2>
+      <p>
+        어느 유입 채널, 기기, 국가, 사용자 유형에서 떨어졌는지 봅니다. “가입
+        완료율 하락”이 실제로는 특정 브라우저 버그인지, 본인인증 copy 문제인지,
+        의도한 저품질 리드 필터링인지 구분해야 합니다.
+      </p>
+
+      <h2>6. 결정 C: 롤백/부분 수정/추가 실험을 비교한다</h2>
+      <p>
+        장애성 버그면 즉시 롤백합니다. 특정 step friction이면 부분 수정합니다.
+        지표가 tradeoff라면 guardrail을 둔 추가 실험이 낫습니다. PM 답변은
+        데이터 확인 후 의사결정 기준까지 말해야 합니다.
+      </p>
+
+      <h2>7. 상황별 선택이 달라진다</h2>
+      <table class="trace">
+        <thead>
+          <tr>
+            <th>상황</th>
+            <th>추천 방향</th>
+            <th>이유</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>버그로 인한 인증 실패</td>
+            <td>즉시 롤백/핫픽스</td>
+            <td>전환 하락이 의도한 tradeoff가 아닙니다.</td>
+          </tr>
+          <tr>
+            <td>저품질 리드 필터링</td>
+            <td>유지 + downstream 검증</td>
+            <td>완료율은 낮아도 LTV가 높아질 수 있습니다.</td>
+          </tr>
+          <tr>
+            <td>모바일 특정 하락</td>
+            <td>부분 수정</td>
+            <td>전체 원복보다 영향 범위를 좁힙니다.</td>
+          </tr>
+          <tr>
+            <td>결제율 상승·환불 증가</td>
+            <td>guardrail 재설정</td>
+            <td>전환 이후 품질 지표가 필요합니다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>8. 흔한 오개념 정리</h2>
+      <details>
+        <summary>오개념 1. 전환율이 떨어지면 무조건 실패다</summary>
+        <p>
+          전환율은 local metric입니다. 활성화, 결제, 환불, CS, LTV와 함께 봐야
+          합니다.
+        </p>
+      </details>
+      <details>
+        <summary>오개념 2. 평균 퍼널만 보면 된다</summary>
+        <p>
+          평균은 segment 문제를 숨깁니다. 모바일 Safari만 깨져도 전체 평균으로는
+          늦게 보일 수 있습니다.
+        </p>
+      </details>
+      <details>
+        <summary>오개념 3. PM은 결정을 미루고 데이터만 더 보면 된다</summary>
+        <p>
+          데이터가 부족해도 피해가 큰 버그라면 빠르게 완화하고, 불확실성은
+          실험으로 줄여야 합니다.
+        </p>
+      </details>
+
+      <h2>9. 판단형 퀴즈</h2>
+
+      <div class="question">
+        <strong
+          >Q1. 가입 완료율은 떨어졌는데 첫 결제율이 올랐다. 좋은 PM
+          질문은?</strong
+        >
+        <ol>
+          <li>무조건 성공이라고 본다</li>
+          <li>완료자 수 감소와 결제율 상승의 순효과, 환불/CS를 같이 본다</li>
+          <li>디자인팀에게 결정하라고 한다</li>
+        </ol>
+        <details>
+          <summary>정답 보기</summary>
+          <p>
+            정답은 2번입니다. local conversion과 downstream quality를 함께 봐야
+            합니다.
+          </p>
+        </details>
+      </div>
+
+      <div class="question">
+        <strong>Q2. 특정 step에서만 급락하면 먼저 할 일은?</strong>
+        <ol>
+          <li>전체 제품 전략 변경</li>
+          <li>해당 step의 로그/에러/세그먼트 확인</li>
+          <li>광고비 증액</li>
+        </ol>
+        <details>
+          <summary>정답 보기</summary>
+          <p>
+            정답은 2번입니다. 원인이 버그인지 UX 마찰인지 의도한 필터링인지
+            구분해야 합니다.
+          </p>
+        </details>
+      </div>
+
+      <h2>10. 먼저 답해보기</h2>
+      <p>
+        아래 질문에 답해보세요. 한 문장으로 끝내지 말고,
+        <strong
+          >문제 정의 → 증거/지표 → 선택지 비교 → 내 선택 → 리스크와
+          보완책</strong
+        >
+        순서로 쓰면 좋습니다.
+      </p>
+      <div class="box">
+        <strong>질문</strong>
+        <p>
+          “가입 완료율이 개편 후 18% 떨어졌습니다. 어떤 질문부터 하고, 롤백/부분
+          수정/추가 실험 중 무엇을 선택하겠습니까?”
+        </p>
+      </div>
       <textarea id="draft" placeholder="내 답변 초안..."></textarea>
       <div class="btns">
         <button onclick="saveDraft()">임시 저장</button
         ><button onclick="copyFeedbackPrompt()">
           내 답변 + 첨삭 프롬프트 복사</button
-        ><button class="primary" onclick="showAll()">해설 열기</button>
+        ><button class="primary" onclick="showAll()">답변 빌더 열기</button>
       </div>
-      <h2>3. 자기 점검 Rubric</h2>
-      <div class="box">
-        <label
-          ><input type="checkbox" /> 지표 정의와 측정 변경 가능성을 먼저
-          확인했다.</label
-        ><label
-          ><input type="checkbox" /> 세그먼트별 하락인지 전체 하락인지
-          나눴다.</label
-        ><label
-          ><input type="checkbox" /> 사용자 행동 funnel과 정성 신호를 함께
-          봤다.</label
-        ><label
-          ><input type="checkbox" /> 원복/부분 롤백/추가 실험의 tradeoff를
-          비교했다.</label
-        ><label
-          ><input type="checkbox" /> 의사결정 기준과 타임라인을 제시했다.</label
-        >
-      </div>
+
       <section id="answers" class="answer-block">
-        <h2>4. 답변 비교</h2>
+        <h2>11. 면접 답변 빌더</h2>
         <div class="box bad">
-          <strong>약한 답변</strong>
-          <p>완료율이 많이 떨어졌으니 일단 원복하고 다시 개선하겠습니다.</p>
+          <strong>아쉬운 답변</strong>
+          <p>“전환율이 떨어졌으니 바로 원복하겠습니다.”</p>
         </div>
         <div class="box">
           <strong>괜찮은 답변</strong>
           <p>
-            먼저 어느 단계에서 이탈이 늘었는지 funnel을 보고, 특정 디바이스나
-            유입 채널에서만 떨어졌는지 확인한 뒤 원복 여부를 결정하겠습니다.
+            “퍼널 단계별로 어디서 떨어졌는지 보고, 문제가 있는 step을
+            개선하겠습니다.”
           </p>
         </div>
         <div class="box good">
           <strong>강한 답변</strong>
           <p>
-            원복 여부를 결정하기 전에 지표 정의/이벤트 로깅 변경, 유입 mix 변화,
-            단계별 funnel, 세그먼트별 하락을 확인하겠습니다. 전체 핵심 지표가
-            유의미하게 악화되고 결제/활성까지 이어진다면 빠른 롤백이 맞지만,
-            특정 단계나 세그먼트 문제라면 부분 롤백이나 hotfix가 더 낫습니다.
-            동시에 세션 리플레이/문의/사용자 인터뷰로 왜 막혔는지 확인하고,
-            24~48시간 안에 “원복/부분 수정/실험 지속” 기준을 명확히
-            제안하겠습니다.
+            “먼저 가입 완료율 하락을 전체 평균이 아니라 step, segment, 유입
+            채널, 기기별로 분해하겠습니다. 동시에 첫 결제율, 환불, CS,
+            activation 같은 downstream/guardrail metric을 봅니다. 인증 실패처럼
+            명확한 버그면 즉시 롤백이나 핫픽스, 특정 segment UX 문제면 부분
+            수정, 품질 tradeoff라면 실험을 유지하되 guardrail과 의사결정 기준을
+            재설정하겠습니다. 결론은 전환율 하나가 아니라 사업 목표와 사용자
+            피해 기준으로 내리겠습니다.”
           </p>
         </div>
-        <h2>5. 면접관 꼬리질문</h2>
+
+        <h2>12. 참고한 데이터/레퍼런스</h2>
+        <div class="box">
+          <ul>
+            <li>
+              Reforge/Amplitude류 funnel analysis 패턴: step별 drop-off와
+              segment 비교.
+            </li>
+            <li>
+              A/B testing guardrail metric 관점: primary metric만 보지 않고
+              품질/부작용 지표를 함께 평가.
+            </li>
+            <li>Lean Analytics: 단계별 핵심 지표와 local optimization 위험.</li>
+            <li>
+              Experimentation platform 사례: rollout, rollback, holdout, segment
+              slicing 의사결정.
+            </li>
+          </ul>
+        </div>
+
+        <h2>13. 면접관 꼬리질문</h2>
         <div class="box">
           <ol>
-            <li>CEO가 지금 당장 원복하자고 하면 어떻게 설득하나요?</li>
-            <li>정성 피드백 5개와 정량 지표가 충돌하면 뭘 우선하나요?</li>
-            <li>가입 완료율은 떨어졌지만 장기 retention은 올랐다면?</li>
+            <li>전환율은 회복됐는데 환불이 늘면 어떻게 판단하나요?</li>
+            <li>세일즈팀과 디자인팀 의견이 충돌하면 어떤 지표로 합의하나요?</li>
+            <li>언제 즉시 롤백하고 언제 실험을 계속하나요?</li>
+            <li>표본이 적을 때 PM은 어떤 결정을 내려야 하나요?</li>
           </ol>
         </div>
         <div class="btns">
@@ -117,7 +317,7 @@
       }
       function copyFeedbackPrompt() {
         const t = document.getElementById("draft").value.trim();
-        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 증거/지표, 선택지 비교, 실행 순서, 리스크 보완책, 말의 구조야.
 
 [페르소나]
 Product Manager

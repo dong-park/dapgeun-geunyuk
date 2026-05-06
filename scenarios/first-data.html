@@ -8,98 +8,287 @@
   </head>
   <body>
     <main>
-      <p class="eyebrow">답변근육 · First Learning Page</p>
+      <p class="eyebrow">
+        답변근육 · First Learning Page · Data Analyst / Data Scientist
+      </p>
       <a class="button" href="../index.html">← 구독 신청으로</a>
       <h1>A/B 테스트가 애매하게 이겼다면 출시해도 될까?</h1>
-      <p>
-        <span class="tag">Data</span><span class="tag">Experiment</span
-        ><span class="tag">중급</span><span class="tag">12분</span>
+      <p class="lead">
+        오늘 목표는 p-value 하나로 출시를 결정하지 않는 것입니다. 효과 크기,
+        신뢰구간, SRM, guardrail, segment risk를 함께 보고 실험 결과를 제품
+        의사결정으로 번역하는 연습입니다.
       </p>
+      <p>
+        <span class="tag">Data</span><span class="tag">A/B Test</span
+        ><span class="tag">Statistics</span><span class="tag">Decision</span
+        ><span class="tag">18분</span>
+      </p>
+
       <div class="box soft">
-        <strong>Data Analyst / Scientist 첫 번째 링크</strong>
+        <strong>Data Analyst / Data Scientist 첫 번째 링크</strong>
         <p>
-          Data Analyst / Scientist로 구독 신청했을 때 첫 번째로 보내는
-          학습페이지입니다. p-value만 말하지 않고 실험 품질과 비즈니스
-          의사결정을 연결하는 연습입니다.
+          Data 직무에게 첫 번째로 보내는 실험 해석 페이지입니다. “통계적으로
+          유의합니다”보다 더 중요한 것은 실험이 믿을 수 있는지, 출시 가치가
+          있는지, 어떤 리스크가 남았는지 말하는 능력입니다.
         </p>
       </div>
-      <h2>1. 실제 상황</h2>
+
+      <h2>1. 먼저 사고를 터뜨려보자</h2>
       <div class="box">
+        <h3>상황</h3>
         <p>
-          검색 결과 정렬 알고리즘 B가 CTR을 +1.2% 올렸지만 구매 전환은
-          -0.4%입니다. p-value는 CTR만 0.04이고, 세그먼트별로는 신규 유저에게만
-          효과가 큽니다. PM은 “유의하니까 출시하자”고 말합니다.
-        </p>
-        <p>
-          <strong>질문:</strong> 데이터 담당자로서 출시 여부를 어떻게
-          판단하겠습니까?
+          새 추천 알고리즘 B가 클릭률을 +1.8% 올렸고 p-value는 0.047입니다.
+          하지만 구매 전환율은 변화가 없고, 신규 사용자 segment에서는 오히려
+          이탈이 늘었습니다. 실험 기간 중 모바일 앱 로그 누락 이슈도 한 번
+          있었습니다.
         </p>
       </div>
-      <h2>2. 먼저 답해보기</h2>
+
+      <div class="question">
+        <strong>예측 질문. 바로 출시하기 전에 가장 먼저 확인할 것은?</strong>
+        <ol>
+          <li>p-value가 0.05보다 작으니 바로 출시한다.</li>
+          <li>SRM/로그 품질/guardrail/효과 크기를 확인한다.</li>
+          <li>클릭률이 올랐으니 구매 전환은 볼 필요 없다.</li>
+        </ol>
+        <details>
+          <summary>정답 보기</summary>
+          <p>
+            정답은 2번입니다. p-value가 기준을 겨우 넘었고 로그 이슈와 segment
+            악화가 있다면 실험 신뢰성과 실질 효과를 먼저 확인해야 합니다.
+          </p>
+        </details>
+      </div>
+
+      <h2>2. 실패 흐름을 타임라인으로 보면 바로 보인다</h2>
+      <table class="trace">
+        <thead>
+          <tr>
+            <th>관측</th>
+            <th>수치</th>
+            <th>위험</th>
+            <th>확인</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CTR</td>
+            <td>+1.8%, p=0.047</td>
+            <td>경계선 유의성</td>
+            <td>신뢰구간/효과 크기</td>
+          </tr>
+          <tr>
+            <td>Purchase CVR</td>
+            <td>변화 없음</td>
+            <td>클릭 품질 의심</td>
+            <td>downstream metric</td>
+          </tr>
+          <tr>
+            <td>신규 사용자</td>
+            <td>이탈 +3.2%</td>
+            <td>segment harm</td>
+            <td>interaction effect</td>
+          </tr>
+          <tr>
+            <td>Traffic split</td>
+            <td>49:51 의심</td>
+            <td>SRM 가능성</td>
+            <td>sample ratio test</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>3. 좋은 답변은 “진단 기준”부터 세운다</h2>
       <p>
-        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+        면접에서 강한 답변은 바로 해결책을 외치지 않습니다. 먼저 어떤 결과가
+        위험한지, 어떤 지표나 증거로 원인을 나눌지, 그리고 어떤 선택지가 어떤
+        비용을 만드는지 설명합니다. 그래야 “그럴듯한 개선안”이 아니라 실제
+        서비스에서 쓸 수 있는 판단으로 들립니다.
       </p>
+
+      <h2>4. 검증 A: 실험이 믿을 수 있는지 먼저 본다</h2>
+      <p>
+        랜덤 배정이 깨졌거나 로그가 누락됐으면 p-value는 의미가 약해집니다. SRM,
+        exposure 정의, 중복 사용자, 봇/내부 트래픽, 로그 누락 기간을 먼저
+        확인합니다.
+      </p>
+
+      <h2>5. 해석 B: 통계적 유의성과 실질적 유의성을 나눈다</h2>
+      <p>
+        p-value는 “효과가 0이라는 가설과 얼마나 맞지 않는가”에 가깝지, 돈이 되는
+        효과인지는 말해주지 않습니다. 효과 크기, 신뢰구간, 비용, rollout risk를
+        함께 봐야 합니다.
+      </p>
+
+      <h2>6. 결정 C: 전체 평균과 segment harm을 함께 본다</h2>
+      <p>
+        전체 CTR이 올라도 신규 사용자 이탈이 늘면 출시가 위험할 수 있습니다.
+        특정 segment 제외 rollout, 추가 실험, metric 재정의, 추천 품질 지표
+        확인이 필요합니다.
+      </p>
+
+      <h2>7. 상황별 선택이 달라진다</h2>
+      <table class="trace">
+        <thead>
+          <tr>
+            <th>상황</th>
+            <th>추천 방향</th>
+            <th>이유</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>p-value 경계선</td>
+            <td>추가 기간/사전 정의 기준 확인</td>
+            <td>우연과 다중검정 위험이 큽니다.</td>
+          </tr>
+          <tr>
+            <td>SRM 발생</td>
+            <td>출시 보류</td>
+            <td>실험 배정/로그 신뢰성이 깨졌을 수 있습니다.</td>
+          </tr>
+          <tr>
+            <td>Primary 승리, guardrail 악화</td>
+            <td>부분 rollout/원인 분석</td>
+            <td>한 지표 최적화가 제품 손상을 만들 수 있습니다.</td>
+          </tr>
+          <tr>
+            <td>효과 작지만 비용 낮음</td>
+            <td>점진 rollout 가능</td>
+            <td>실질 가치와 리스크를 함께 봅니다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>8. 흔한 오개념 정리</h2>
+      <details>
+        <summary>오개념 1. p<0.05면 무조건 출시다</summary>
+        <p>
+          통계적 유의성은 의사결정의 일부입니다. 실질 효과, guardrail, 실험
+          신뢰성이 필요합니다.
+        </p>
+      </details>
+      <details>
+        <summary>오개념 2. 평균 효과가 좋으면 모두에게 좋다</summary>
+        <p>
+          segment별 피해가 평균에 숨을 수 있습니다. 특히 신규/고가치/취약 사용자
+          segment를 확인해야 합니다.
+        </p>
+      </details>
+      <details>
+        <summary>오개념 3. 실험 중 로그 이슈는 나중에 보정하면 된다</summary>
+        <p>exposure와 outcome 로그가 깨지면 실험 자체를 신뢰하기 어렵습니다.</p>
+      </details>
+
+      <h2>9. 판단형 퀴즈</h2>
+
+      <div class="question">
+        <strong>Q1. SRM이 의심될 때 좋은 대응은?</strong>
+        <ol>
+          <li>p-value만 보고 출시</li>
+          <li>배정/노출/로그 파이프라인을 점검하고 출시 보류</li>
+          <li>그래프 색상을 바꾼다</li>
+        </ol>
+        <details>
+          <summary>정답 보기</summary>
+          <p>정답은 2번입니다. SRM은 실험 신뢰성 문제의 신호일 수 있습니다.</p>
+        </details>
+      </div>
+
+      <div class="question">
+        <strong>Q2. CTR은 올랐지만 구매가 그대로라면?</strong>
+        <ol>
+          <li>클릭 품질과 downstream metric을 확인한다</li>
+          <li>CTR만 primary면 무조건 출시</li>
+          <li>신규 사용자는 제외하고 결과를 숨긴다</li>
+        </ol>
+        <details>
+          <summary>정답 보기</summary>
+          <p>
+            정답은 1번입니다. 클릭 유도만 늘고 구매 가치가 없다면 local
+            optimization일 수 있습니다.
+          </p>
+        </details>
+      </div>
+
+      <h2>10. 먼저 답해보기</h2>
+      <p>
+        아래 질문에 답해보세요. 한 문장으로 끝내지 말고,
+        <strong
+          >문제 정의 → 증거/지표 → 선택지 비교 → 내 선택 → 리스크와
+          보완책</strong
+        >
+        순서로 쓰면 좋습니다.
+      </p>
+      <div class="box">
+        <strong>질문</strong>
+        <p>
+          “A/B 테스트에서 primary metric은 간신히 이겼지만 guardrail과 segment에
+          우려가 있습니다. 출시하겠습니까?”
+        </p>
+      </div>
       <textarea id="draft" placeholder="내 답변 초안..."></textarea>
       <div class="btns">
         <button onclick="saveDraft()">임시 저장</button
         ><button onclick="copyFeedbackPrompt()">
           내 답변 + 첨삭 프롬프트 복사</button
-        ><button class="primary" onclick="showAll()">해설 열기</button>
+        ><button class="primary" onclick="showAll()">답변 빌더 열기</button>
       </div>
-      <h2>3. 자기 점검 Rubric</h2>
-      <div class="box">
-        <label
-          ><input type="checkbox" /> primary metric과 guardrail metric을
-          구분했다.</label
-        ><label
-          ><input type="checkbox" /> 효과 크기와 p-value를 함께 해석했다.</label
-        ><label
-          ><input type="checkbox" /> 세그먼트 분석의 다중검정/사후분석 리스크를
-          언급했다.</label
-        ><label
-          ><input type="checkbox" /> 비즈니스 비용과 사용자 경험 영향을
-          연결했다.</label
-        ><label
-          ><input type="checkbox" /> 추가 실험/점진 rollout 기준을
-          제시했다.</label
-        >
-      </div>
+
       <section id="answers" class="answer-block">
-        <h2>4. 답변 비교</h2>
+        <h2>11. 면접 답변 빌더</h2>
         <div class="box bad">
-          <strong>약한 답변</strong>
-          <p>
-            p-value가 0.05보다 작으니 CTR은 유의하게 개선됐고 출시해도 됩니다.
-          </p>
+          <strong>아쉬운 답변</strong>
+          <p>“p-value가 0.05보다 작으니 출시하겠습니다.”</p>
         </div>
         <div class="box">
           <strong>괜찮은 답변</strong>
           <p>
-            CTR은 개선됐지만 구매 전환이 내려갔으니 바로 전체 출시는 위험합니다.
-            primary metric과 guardrail을 확인하고 신규 유저 세그먼트에
-            제한적으로 rollout하는 방안을 보겠습니다.
+            “효과 크기와 segment를 보고 guardrail 문제가 있으면 추가
+            분석하겠습니다.”
           </p>
         </div>
         <div class="box good">
           <strong>강한 답변</strong>
           <p>
-            먼저 이 실험의 primary metric이 CTR인지 구매 전환인지, guardrail이
-            무엇인지 확인하겠습니다. CTR +1.2%가 통계적으로 유의해도 구매 전환
-            -0.4%가 비즈니스상 더 큰 손실일 수 있습니다. 신규 유저 효과는 사후
-            세그먼트 분석이면 과대해석 위험이 있으니, 가설을 명확히 해서
-            재실험하거나 신규 유저 대상 점진 rollout을 제안하겠습니다. 결론은
-            “유의하니 출시”가 아니라 효과 크기, guardrail, 세그먼트 신뢰도,
-            손익을 함께 본 의사결정입니다.
+            “먼저 실험이 믿을 수 있는지 확인하겠습니다. SRM, exposure 정의, 로그
+            누락, 중복 사용자를 점검하고 문제가 있으면 출시를 보류합니다. 결과가
+            유효하다면 p-value만 보지 않고 효과 크기와 신뢰구간, 구매 전환/이탈
+            같은 guardrail, 신규 사용자 segment harm을 함께 봅니다. 전체 CTR
+            상승이 실질 가치로 이어지지 않거나 특정 segment를 해치면 전체 출시는
+            하지 않고 부분 rollout이나 추가 실험으로 원인을 좁히겠습니다.”
           </p>
         </div>
-        <h2>5. 면접관 꼬리질문</h2>
+
+        <h2>12. 참고한 데이터/레퍼런스</h2>
+        <div class="box">
+          <ul>
+            <li>
+              Ron Kohavi et al. Online Controlled Experiments: guardrail, SRM,
+              실험 신뢰성 패턴.
+            </li>
+            <li>
+              Evan Miller A/B testing articles: p-value, power, sample size
+              해석.
+            </li>
+            <li>
+              Trustworthy Online Controlled Experiments: triggering/exposure,
+              novelty effect, metric tradeoff.
+            </li>
+            <li>
+              실험 플랫폼 운영 사례: rollout, holdout, segment analysis,
+              decision log.
+            </li>
+          </ul>
+        </div>
+
+        <h2>13. 면접관 꼬리질문</h2>
         <div class="box">
           <ol>
-            <li>
-              p-value와 confidence interval을 면접관에게 쉽게 설명해보세요.
-            </li>
-            <li>실험 기간 중 마케팅 캠페인이 시작됐다면 어떻게 하나요?</li>
-            <li>세그먼트 분석은 언제 신뢰할 수 있나요?</li>
+            <li>p-value는 통과했는데 SRM이 있으면 어떻게 하나요?</li>
+            <li>효과 크기가 작지만 유의하면 출시하나요?</li>
+            <li>다중 지표를 볼 때 false positive는 어떻게 줄이나요?</li>
+            <li>실험을 중간에 멈추면 어떤 문제가 생기나요?</li>
           </ol>
         </div>
         <div class="btns">
@@ -123,10 +312,10 @@
       }
       function copyFeedbackPrompt() {
         const t = document.getElementById("draft").value.trim();
-        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 증거/지표, 선택지 비교, 실행 순서, 리스크 보완책, 말의 구조야.
 
 [페르소나]
-Data Analyst / Scientist
+Data Analyst / Data Scientist
 
 [시나리오]
 A/B 테스트가 애매하게 이겼다면 출시해도 될까?
