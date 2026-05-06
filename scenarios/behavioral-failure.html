@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 실패한 프로젝트를 어떻게 설명할까?</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Scenario Link</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>실패한 프로젝트를 어떻게 설명할까?</h1>
+      <p>
+        <span class="tag">Behavioral·Leadership</span
+        ><span class="tag">중급</span><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>왜 이 링크를 받았나요?</strong>
+        <p>
+          실패 경험을 변명이 아니라 학습과 재발 방지로 구조화하는 연습입니다.
+        </p>
+      </div>
+      <h2>1. 상황</h2>
+      <div class="box">
+        <p>
+          면접관이 “가장 크게 실패한 프로젝트와 거기서 배운 점을 말해보세요”라고
+          묻습니다.
+        </p>
+        <p><strong>질문:</strong> 어떤 구조로 답하겠습니까?</p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label><input type="checkbox" /> 문제를 한 문장으로 정의했다.</label
+        ><label><input type="checkbox" /> 원인 후보를 2개 이상 열어뒀다.</label
+        ><label
+          ><input type="checkbox" /> 선택지의 장단점/트레이드오프를
+          말했다.</label
+        ><label
+          ><input type="checkbox" /> 운영/측정/후속 액션을 언급했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>일정이 부족했고 요구사항이 계속 바뀌어서 실패했습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            상황, 내 역할, 잘못 판단한 지점, 영향, 이후 바꾼 행동을 구조화해서
+            말하겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            STAR 구조로 말하되 변명처럼 들리지 않게 제 판단과 책임을 명확히
+            하겠습니다. 상황과 목표를 짧게 설명하고, 내가 어떤 가정을
+            잘못했는지, 그로 인해 어떤 영향이 있었는지 말합니다. 이후 재발
+            방지를 위해 일정 리스크를 조기에 공유하고, 중간 마일스톤과 의사결정
+            로그를 남기는 방식으로 일하는 방식을 바꿨다고 연결하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>실패 원인을 외부 탓으로 보이지 않게 하려면?</li>
+            <li>배운 점을 어떻게 행동 변화로 증명하나요?</li>
+            <li>이 실패가 다시 생기지 않는다는 근거는 무엇인가요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-behavioral-failure";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 운영 리스크, 말의 구조야.
+
+[시나리오]
+실패한 프로젝트를 어떻게 설명할까?
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

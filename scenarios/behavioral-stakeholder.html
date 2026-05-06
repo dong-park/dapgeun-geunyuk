@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 우선순위가 충돌할 때 어떻게 말할까?</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Scenario Link</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>우선순위가 충돌할 때 어떻게 말할까?</h1>
+      <p>
+        <span class="tag">Behavioral·Leadership</span
+        ><span class="tag">중급</span><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>왜 이 링크를 받았나요?</strong>
+        <p>
+          커뮤니케이션/조율 약점을 선택한 사용자를 위한 행동면접 시나리오입니다.
+        </p>
+      </div>
+      <h2>1. 상황</h2>
+      <div class="box">
+        <p>
+          영업팀은 대형 고객 요청을 이번 주에 넣어달라고 하고, 개발팀은 이미
+          장애 재발 방지 작업으로 꽉 차 있습니다. 대표는 둘 다 중요하다고
+          말합니다.
+        </p>
+        <p><strong>질문:</strong> 어떻게 우선순위를 조율하겠습니까?</p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label><input type="checkbox" /> 문제를 한 문장으로 정의했다.</label
+        ><label><input type="checkbox" /> 원인 후보를 2개 이상 열어뒀다.</label
+        ><label
+          ><input type="checkbox" /> 선택지의 장단점/트레이드오프를
+          말했다.</label
+        ><label
+          ><input type="checkbox" /> 운영/측정/후속 액션을 언급했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>둘 다 중요하니 야근해서 최대한 처리하겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            각 작업의 임팩트와 리스크를 정리하고, 의사결정자가 선택할 수 있는
+            옵션을 만들겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            먼저 두 요청을 같은 기준으로 비교할 수 있게 고객 영향, 매출 영향,
+            장애 재발 리스크, 지연 비용, 투입 리소스를 정리하겠습니다. 그 다음
+            “이번 주 고객 요청을 하면 재발 방지 작업이 얼마나 밀리는지”, “부분
+            대응은 가능한지”, “장애 리스크를 낮추는 최소 조치는 무엇인지” 같은
+            선택지를 만들어 의사결정자와 합의하겠습니다. 팀에는 결정 배경과
+            포기한 것의 리스크를 투명하게 공유하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>이 상황에서 절대 하면 안 되는 말은 무엇인가요?</li>
+            <li>대표가 둘 다 하라고 하면 어떻게 대응하나요?</li>
+            <li>결정 후 팀 사기를 어떻게 관리하나요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-behavioral-stakeholder";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 운영 리스크, 말의 구조야.
+
+[시나리오]
+우선순위가 충돌할 때 어떻게 말할까?
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

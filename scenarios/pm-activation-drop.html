@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 가입 완료율이 18% 떨어졌다</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Scenario Link</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>가입 완료율이 18% 떨어졌다</h1>
+      <p>
+        <span class="tag">Product·Data</span><span class="tag">중급</span
+        ><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>왜 이 링크를 받았나요?</strong>
+        <p>
+          PM/Product·Data 트랙에서 지표 하락을 성급히 단정하지 않고 진단하는
+          연습입니다.
+        </p>
+      </div>
+      <h2>1. 상황</h2>
+      <div class="box">
+        <p>
+          신규 온보딩 퍼널의 가입 완료율이 지난주 대비 18% 하락했습니다.
+          엔지니어링팀은 배포 영향이 없다고 하고, 마케팅팀은 유입 채널 변화
+          때문일 수 있다고 합니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 어떤 순서로 문제를 진단하고, 어떤 데이터부터
+          보겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label><input type="checkbox" /> 문제를 한 문장으로 정의했다.</label
+        ><label><input type="checkbox" /> 원인 후보를 2개 이상 열어뒀다.</label
+        ><label
+          ><input type="checkbox" /> 선택지의 장단점/트레이드오프를
+          말했다.</label
+        ><label
+          ><input type="checkbox" /> 운영/측정/후속 액션을 언급했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>마케팅 유입이 바뀐 것 같으니 광고 채널을 먼저 확인하겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            먼저 지표 정의와 집계 오류를 확인하고,
+            기간/세그먼트/채널/디바이스/버전별로 하락이 어디서 발생했는지 나누어
+            보겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            먼저 이 하락이 실제 사용자 행동 변화인지 계측/집계 문제인지
+            확인하겠습니다. 이후 퍼널 단계별로 어디서 이탈이 늘었는지 보고,
+            채널·디바이스·앱버전·신규/재방문 세그먼트로 쪼개겠습니다. 특정
+            세그먼트에 집중되어 있으면 최근 배포, 캠페인, UX 변경, 장애 로그를
+            연결해 가설을 세우고, 영향도와 복구 속도를 기준으로 우선순위를
+            정하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>가장 먼저 볼 guardrail metric은 무엇인가요?</li>
+            <li>하락이 특정 채널에만 있다면 액션은 어떻게 달라지나요?</li>
+            <li>데이터가 애매하면 어떤 결정을 내리겠습니까?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-pm-activation-drop";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 운영 리스크, 말의 구조야.
+
+[시나리오]
+가입 완료율이 18% 떨어졌다
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

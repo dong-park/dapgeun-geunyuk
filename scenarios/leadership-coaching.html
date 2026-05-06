@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 성과가 낮은 팀원을 어떻게 도울까?</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Scenario Link</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>성과가 낮은 팀원을 어떻게 도울까?</h1>
+      <p>
+        <span class="tag">Behavioral·Leadership</span
+        ><span class="tag">중급</span><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>왜 이 링크를 받았나요?</strong>
+        <p>
+          리더십/코칭 답변에서 비난이 아니라 기대치 정렬과 지원 계획을 말하는
+          연습입니다.
+        </p>
+      </div>
+      <h2>1. 상황</h2>
+      <div class="box">
+        <p>
+          팀원 한 명이 최근 두 달간 마감일을 반복적으로 놓치고 코드 리뷰에서도
+          같은 피드백을 받습니다. 본인은 열심히 하고 있다고 말합니다.
+        </p>
+        <p><strong>질문:</strong> 리더라면 어떻게 코칭하겠습니까?</p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label><input type="checkbox" /> 문제를 한 문장으로 정의했다.</label
+        ><label><input type="checkbox" /> 원인 후보를 2개 이상 열어뒀다.</label
+        ><label
+          ><input type="checkbox" /> 선택지의 장단점/트레이드오프를
+          말했다.</label
+        ><label
+          ><input type="checkbox" /> 운영/측정/후속 액션을 언급했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>성과가 낮으니 더 열심히 하라고 말하겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            구체 사례를 기반으로 기대치와 현재 차이를 설명하고, 원인과 지원
+            방법을 함께 찾겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            먼저 인상평이 아니라 마감 지연, 반복 피드백, 영향 범위 같은 구체
+            사례를 정리해 1:1에서 공유하겠습니다. 그 다음 기대 수준과 현재
+            상태의 차이를 맞추고, 원인이 역량/업무량/우선순위/컨텍스트 부족 중
+            무엇인지 같이 확인하겠습니다. 이후 2~4주 단위의 작은 개선 목표, 지원
+            방식, 체크인 주기를 합의하고 개선 여부를 관찰하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>심리적 안전감과 명확한 피드백을 어떻게 같이 가져가나요?</li>
+            <li>개선되지 않으면 다음 단계는 무엇인가요?</li>
+            <li>본인이 문제를 인정하지 않으면 어떻게 하나요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-leadership-coaching";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 운영 리스크, 말의 구조야.
+
+[시나리오]
+성과가 낮은 팀원을 어떻게 도울까?
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

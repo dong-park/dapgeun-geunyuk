@@ -1,0 +1,238 @@
+:root {
+  --bg: #f4f4f1;
+  --paper: #fffef9;
+  --ink: #111;
+  --muted: #666;
+  --line: #111;
+  --soft: #e9e5dc;
+  --accent: #e3efff;
+  --good: #d8f5d0;
+  --bad: #ffd9d9;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Apple SD Gothic Neo", "Malgun Gothic", monospace;
+  line-height: 1.72;
+  word-break: keep-all;
+}
+main {
+  width: min(1040px, calc(100% - 32px));
+  margin: 28px auto;
+  padding: 34px 30px 42px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 8px 8px 0 #d8d4ca;
+}
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 24px;
+  align-items: start;
+}
+h1 {
+  margin: 0 0 14px;
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.07em;
+}
+h2 {
+  margin: 2.2rem 0 0.7rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  font-size: 1.25rem;
+}
+h3 {
+  margin: 1.2rem 0 0.4rem;
+  font-size: 1rem;
+}
+.lead {
+  font-size: 1.08rem;
+  color: #222;
+}
+.box,
+.question,
+.card {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.soft {
+  background: var(--soft);
+}
+.accent {
+  background: var(--accent);
+}
+.good {
+  background: var(--good);
+}
+.bad {
+  background: var(--bad);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.tag {
+  display: inline-block;
+  margin: 0.15rem 0.2rem 0.15rem 0;
+  padding: 0.12rem 0.4rem;
+  border: 1px solid var(--line);
+  background: var(--accent);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+label {
+  display: block;
+  margin: 0.72rem 0 0.25rem;
+  font-weight: 800;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.55;
+}
+textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+.checks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.35rem 0.7rem;
+  margin: 0.5rem 0;
+}
+.checks label {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+  margin: 0;
+  font-weight: 500;
+}
+.checks input {
+  width: auto;
+  margin-top: 0.35rem;
+}
+.btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+button,
+.button {
+  display: inline-block;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:hover,
+.button:hover {
+  background: var(--accent);
+}
+.primary {
+  background: var(--ink);
+  color: #fff;
+}
+.primary:hover {
+  background: #333;
+}
+.muted {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.result {
+  display: none;
+}
+.result.show {
+  display: block;
+}
+.scenario-list {
+  display: grid;
+  gap: 0.75rem;
+}
+.scenario-link {
+  display: block;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+}
+.scenario-link:hover {
+  background: var(--accent);
+}
+details {
+  margin: 0.8rem 0;
+  padding: 0.8rem;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+.trace {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  margin: 0.9rem 0;
+}
+.trace th,
+.trace td {
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  vertical-align: top;
+  text-align: left;
+}
+.trace th {
+  background: var(--soft);
+}
+.answer-block {
+  display: none;
+}
+.answer-block.show {
+  display: block;
+}
+@media (max-width: 760px) {
+  main {
+    width: min(100% - 18px, 1040px);
+    margin: 10px auto;
+    padding: 24px 18px 32px;
+    box-shadow: 4px 4px 0 #d8d4ca;
+  }
+  .hero,
+  .grid,
+  .two,
+  .checks {
+    grid-template-columns: 1fr;
+  }
+}

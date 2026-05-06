@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 재고 1개에 주문 2개가 동시에 들어오면?</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Scenario Link</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>재고 1개에 주문 2개가 동시에 들어오면?</h1>
+      <p>
+        <span class="tag">Software</span><span class="tag">중급</span
+        ><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>왜 이 링크를 받았나요?</strong>
+        <p>
+          Software 트랙에서 동시성 문제를 실제 주문/재고 상황으로 설명하는
+          연습입니다.
+        </p>
+      </div>
+      <h2>1. 상황</h2>
+      <div class="box">
+        <p>
+          재고가 1개 남은 상품에 주문 요청 A와 B가 거의 동시에 들어왔습니다. 두
+          요청 모두 재고를 1로 읽고 주문 성공 처리했습니다. 결과적으로 실제
+          재고는 -1이 되었고, 고객 두 명 모두 구매 성공 메시지를 받았습니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 이 문제를 어떻게 진단하고 어떤 방식으로
+          막겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> lost update 또는 overselling 문제로
+          정의했다.</label
+        ><label
+          ><input type="checkbox" /> 비관적 락/낙관적 락/조건부 업데이트/큐 기반
+          직렬화를 비교했다.</label
+        ><label
+          ><input type="checkbox" /> 트래픽, UX, 운영 복잡도 tradeoff를
+          말했다.</label
+        ><label
+          ><input type="checkbox" /> 멱등성, 재시도, 모니터링을 언급했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>트랜잭션을 걸어서 재고를 차감하면 됩니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            동시에 같은 재고를 읽는 문제이므로 조건부 업데이트나 락으로 한
+            요청만 성공하게 만들겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            이 문제는 동시에 같은 재고 row를 읽고 차감하면서 발생하는
+            overselling 문제입니다. 단순 트랜잭션만으로 충분한지 격리 수준과
+            업데이트 방식을 확인해야 합니다. 선택지는 비관적 락, 낙관적 락,
+            조건부 업데이트, 큐 기반 직렬화가 있고, 재고처럼 정합성이 중요한
+            경우에는 DB 조건부 업데이트로 원자적으로 차감하거나 상품 단위 큐로
+            직렬화할 수 있습니다. 큐를 쓴다면 중복 메시지, 워커 실패, 처리 지연,
+            멱등키, 모니터링까지 함께 설계하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>조건부 업데이트와 비관적 락의 차이는 무엇인가요?</li>
+            <li>큐를 쓰면 락은 정말 필요 없어지나요?</li>
+            <li>결제는 성공했는데 재고 차감이 실패하면 어떻게 보상하나요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-stock-concurrency";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 선택지 비교, 트레이드오프, 운영 리스크, 말의 구조야.
+
+[시나리오]
+재고 1개에 주문 2개가 동시에 들어오면?
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>
