@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 사용자는 못 찾는데 팀은 “화면에 있다”고 말한다</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Second Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>사용자는 못 찾는데 팀은 “화면에 있다”고 말한다</h1>
+      <p>
+        <span class="tag">Design/UX</span
+        ><span class="tag">Information Architecture</span
+        ><span class="tag">중급</span><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>Designer / UX 두 번째 링크</strong>
+        <p>
+          Designer / UX의 두 번째 학습페이지입니다. 기능 존재 여부가 아니라
+          사용자의 탐색 맥락, 정보 구조, 용어 문제로 설명하는 연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          고객센터에 “구독 해지를 못 찾겠다”는 문의가 늘었습니다. 실제로 해지
+          버튼은 설정 &gt; 결제 관리 &gt; 플랜 상세 하단에 있습니다. PM은
+          “화면에 있으니 문제 없다”고 말하지만, 사용자 테스트에서는 대부분 1분
+          안에 찾지 못했습니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 이 문제를 어떻게 정의하고 어떤 디자인 개선을
+          제안하겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 기능 존재와 발견 가능성을 구분했다.</label
+        ><label
+          ><input type="checkbox" /> 사용자 목표/용어/경로의 문제를
+          짚었다.</label
+        ><label
+          ><input type="checkbox" /> 신뢰와 자기결정권 관점으로 설명했다.</label
+        ><label><input type="checkbox" /> 개선안과 검증 지표를 제시했다.</label
+        ><label
+          ><input type="checkbox" /> 비즈니스 KPI와 사용자 신뢰의 tradeoff를
+          말했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>버튼을 더 크게 만들고 색을 진하게 하겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            해지를 찾는 사용자의 경로를 기준으로 정보 구조를 바꾸고, 설정이나
+            결제 화면에서 더 명확한 라벨로 노출하겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            문제는 버튼이 존재하느냐가 아니라 사용자가 자신의 목표 언어로 예측
+            가능한 위치에서 찾을 수 있느냐입니다. 해지를 숨기는 경험은 단기
+            retention에는 좋아 보일 수 있지만 신뢰와 CS 비용을 해칩니다. “구독
+            관리” 같은 사용자의 용어로 상위 경로를 명확히 하고, 결제/플랜
+            화면에서 해지와 다운그레이드 옵션을 투명하게 제공합니다. 검증은 해지
+            경로 성공률, 탐색 시간, 관련 CS, 해지 후 재가입 의향까지 보겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>해지를 쉽게 만들면 churn이 늘지 않나요?</li>
+            <li>비즈니스가 원하지 않는 기능도 UX는 쉽게 만들어야 하나요?</li>
+            <li>사용자 테스트 5명 결과를 어떻게 설득하나요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-second-design";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Designer / UX
+
+[시나리오]
+사용자는 못 찾는데 팀은 “화면에 있다”고 말한다
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

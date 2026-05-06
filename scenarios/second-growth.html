@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 가입자는 늘었는데 좋은 고객은 줄었다</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Second Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>가입자는 늘었는데 좋은 고객은 줄었다</h1>
+      <p>
+        <span class="tag">Growth</span
+        ><span class="tag">Acquisition Quality</span
+        ><span class="tag">중급</span><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>Marketer / Growth 두 번째 링크</strong>
+        <p>
+          Marketer / Growth의 두 번째 학습페이지입니다. acquisition volume이
+          아니라 고객 품질, payback, retention까지 연결하는 연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          무료 체험 캠페인 후 가입자는 3배 늘었습니다. 하지만 결제 전환율은
+          절반으로 떨어졌고, CS에는 “무료인 줄 알았다”는 문의가 늘었습니다.
+          광고팀은 CAC가 낮아졌다고 보고 예산 증액을 주장합니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 이 캠페인을 성공으로 볼지, 어떤 데이터를 추가로
+          확인하겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 가입 수와 qualified user를 구분했다.</label
+        ><label
+          ><input type="checkbox" /> CAC뿐 아니라 activation/paid
+          conversion/payback을 봤다.</label
+        ><label
+          ><input type="checkbox" /> 메시지-misfit과 기대치 불일치를
+          언급했다.</label
+        ><label
+          ><input type="checkbox" /> 채널/소재/세그먼트별 품질을 나눴다.</label
+        ><label><input type="checkbox" /> 증액 전 실험 기준을 제시했다.</label>
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>가입자가 3배 늘었고 CAC가 낮아졌으니 성공입니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            가입자는 늘었지만 결제 전환율이 떨어졌으니 유입 품질을 봐야 합니다.
+            채널별 전환율과 체험 후 결제율을 확인하겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            이 캠페인은 volume은 키웠지만 좋은 고객을 데려왔는지 아직 모릅니다.
+            CAC가 낮아져도 activation, paid conversion, refund/CS, payback이
+            나빠지면 손해입니다. 특히 “무료인 줄 알았다”는 문의는 소재가 기대를
+            잘못 만들었을 가능성이 큽니다. 채널/소재/세그먼트별로 activation과
+            결제 전환, 4주 retention, CS율을 보고, 메시지를 명확히 한 소재와
+            비교 실험한 뒤 예산 증액을 결정하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>CAC가 낮아졌는데 왜 캠페인을 멈출 수 있나요?</li>
+            <li>좋은 고객의 정의는 누가 정하나요?</li>
+            <li>소재 메시지를 바꾸면 전환율이 떨어질 때 어떻게 판단하나요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-second-growth";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Marketer / Growth
+
+[시나리오]
+가입자는 늘었는데 좋은 고객은 줄었다
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

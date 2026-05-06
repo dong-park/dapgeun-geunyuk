@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 기능 사용률은 높은데 리텐션은 그대로다</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Second Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>기능 사용률은 높은데 리텐션은 그대로다</h1>
+      <p>
+        <span class="tag">PM</span><span class="tag">Retention</span
+        ><span class="tag">중급</span><span class="tag">12분</span>
+      </p>
+      <div class="box soft">
+        <strong>Product Manager 두 번째 링크</strong>
+        <p>
+          Product Manager의 두 번째 학습페이지입니다. 기능 사용률을 성공으로
+          착각하지 않고, 제품 가치와 장기 지표를 연결하는 연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          새로운 AI 요약 기능의 클릭률은 48%로 높습니다. 팀은 성공이라고 보고 더
+          많은 AI 기능을 넣자고 합니다. 그런데 4주 리텐션, 유료 전환율, 주간
+          활성일수는 거의 변하지 않았습니다. 일부 사용자는 “처음엔 신기했는데
+          계속 쓰진 않는다”고 말합니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 이 기능을 성공으로 볼지, 다음 투자를 어떻게
+          결정할지 답해보세요.
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 사용률과 제품 가치 지표를 구분했다.</label
+        ><label
+          ><input type="checkbox" /> novelty effect 가능성을 언급했다.</label
+        ><label
+          ><input type="checkbox" /> 세그먼트별 반복 사용/과업 성공 여부를
+          확인했다.</label
+        ><label
+          ><input type="checkbox" /> 추가 투자/개선/축소의 기준을
+          제시했다.</label
+        ><label
+          ><input type="checkbox" /> 정량 지표와 정성 피드백을 연결했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>클릭률이 높으니 사용자가 좋아하는 기능이고 더 확장해도 됩니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            클릭률은 높지만 리텐션 변화가 없으니 반복 사용률과 유료 전환 기여를
+            더 봐야 합니다. 특정 세그먼트에서만 가치가 있는지 확인하겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            기능 사용률은 관심을 보여주지만 제품 가치의 최종 증거는 아닙니다. AI
+            요약이 실제 과업 성공률, 시간 절감, 반복 사용, 유료 전환에
+            기여하는지 봐야 합니다. 초기에는 novelty effect로 클릭이 높을 수
+            있으니 cohort별 2~4주 반복 사용과 세그먼트별 효과를 확인하겠습니다.
+            만약 특정 직군/상황에서만 효과가 크다면 전체 확장보다 그 세그먼트의
+            workflow에 깊게 통합하는 쪽이 낫습니다. 다음 투자는 “AI 기능 추가”가
+            아니라 리텐션/전환을 움직이는 사용 맥락이 검증될 때 하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>클릭률이 높은데 왜 성공이 아닐 수 있나요?</li>
+            <li>리텐션을 움직이기 어려운 초기 기능은 어떻게 평가하나요?</li>
+            <li>정성 인터뷰 5명만으로 방향을 바꿔도 되나요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-second-pm";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Product Manager
+
+[시나리오]
+기능 사용률은 높은데 리텐션은 그대로다
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

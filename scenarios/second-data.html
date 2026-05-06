@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 대시보드 숫자와 결제 DB 숫자가 다르다</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Second Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>대시보드 숫자와 결제 DB 숫자가 다르다</h1>
+      <p>
+        <span class="tag">Data</span><span class="tag">Metric Quality</span
+        ><span class="tag">중급</span><span class="tag">12분</span>
+      </p>
+      <div class="box soft">
+        <strong>Data Analyst / Scientist 두 번째 링크</strong>
+        <p>
+          Data Analyst / Scientist의 두 번째 학습페이지입니다. 숫자 차이를 단순
+          SQL 오류가 아니라 정의, 파이프라인, 지연, 중복의 문제로 진단하는
+          연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          월 매출 리포트에서 BI 대시보드는 12.4억을 보여주는데, 결제 DB 집계는
+          11.8억입니다. 재무팀은 오늘 숫자를 확정해야 하고, PM은 BI 숫자를
+          기준으로 보고서를 만들었습니다. ETL은 하루 4번 돌고, 환불/부분취소
+          이벤트는 별도 테이블에 있습니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 어떤 순서로 원인을 좁히고, 오늘 어떤 숫자를
+          보고 기준으로 삼겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> metric definition을 먼저 확인했다.</label
+        ><label
+          ><input type="checkbox" /> 데이터 freshness/ETL 지연을
+          확인했다.</label
+        ><label
+          ><input type="checkbox" /> 환불/취소/중복/타임존을 후보로
+          열었다.</label
+        ><label
+          ><input type="checkbox" /> source of truth와 임시 보고 기준을
+          구분했다.</label
+        ><label
+          ><input type="checkbox" /> 재발 방지용 metric contract/test를
+          제안했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>BI 쿼리가 틀린 것 같으니 SQL을 다시 확인하겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            먼저 매출 정의가 같은지 보고, ETL 지연이나 환불 반영 여부, 타임존
+            차이를 확인하겠습니다. 재무 확정은 결제 원장 기준으로 하는 게
+            안전합니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            숫자 불일치는 SQL 하나의 문제가 아니라 정의와 파이프라인 문제일 수
+            있습니다. 먼저 매출 정의가 gross인지 net인지,
+            환불/부분취소/쿠폰/세금 포함 여부가 같은지 맞춥니다. 그 다음 ETL
+            freshness, 중복 결제 이벤트, 타임존, late-arriving data를
+            확인합니다. 오늘 확정 숫자는 source of truth인 결제 원장 기준으로
+            두고, BI는 차이 원인과 보정 여부를 표시하겠습니다. 재발 방지를 위해
+            metric definition 문서, freshness 알림, reconciliation test를
+            추가하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>source of truth는 항상 production DB인가요?</li>
+            <li>
+              late-arriving data가 있으면 대시보드는 어떻게 보여줘야 하나요?
+            </li>
+            <li>재무팀과 PM이 원하는 숫자 정의가 다르면?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-second-data";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Data Analyst / Scientist
+
+[시나리오]
+대시보드 숫자와 결제 DB 숫자가 다르다
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

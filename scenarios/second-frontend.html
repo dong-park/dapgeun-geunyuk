@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 모바일에서만 버튼이 두 번 눌려 결제가 중복됐다</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Second Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>모바일에서만 버튼이 두 번 눌려 결제가 중복됐다</h1>
+      <p>
+        <span class="tag">Frontend</span><span class="tag">UX Reliability</span
+        ><span class="tag">중급</span><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>Frontend Engineer 두 번째 링크</strong>
+        <p>
+          Frontend Engineer의 두 번째 학습페이지입니다. UI 버그를 단순 disable
+          처리로 끝내지 않고 네트워크, idempotency, 사용자 피드백까지 연결하는
+          연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          모바일 결제 페이지에서 사용자가 구매 버튼을 한 번 눌렀는데 결제가 두
+          번 생성됐다는 CS가 들어왔습니다. 로그를 보니 일부 기기에서 터치
+          이벤트가 중복 발생했고, 네트워크가 느릴 때 사용자가 다시 버튼을 누른
+          케이스도 있습니다. 백엔드는 “프론트에서 버튼 disable 해주세요”라고
+          합니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 프론트엔드 입장에서 어디까지 책임지고, 백엔드와
+          어떤 계약을 맞추겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 중복 클릭, 이벤트 중복, 재시도, 네트워크
+          지연을 분리했다.</label
+        ><label
+          ><input type="checkbox" /> 버튼 disable/loading 상태만으로 충분하지
+          않음을 말했다.</label
+        ><label
+          ><input type="checkbox" /> idempotency key 같은 API 계약을
+          제안했다.</label
+        ><label
+          ><input type="checkbox" /> 사용자 피드백/복구 UX를 포함했다.</label
+        ><label
+          ><input type="checkbox" /> 모바일/브라우저별 재현과 계측을
+          언급했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>버튼을 누르면 바로 disabled 처리해서 중복 클릭을 막겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            프론트에서는 loading 상태와 버튼 disable, 중복 submit 방지를 넣고,
+            백엔드에도 같은 요청을 한 번만 처리할 수 있도록 요청 id를
+            보내겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            프론트의 버튼 disable은 필요하지만 최종 방어선은 아닙니다. 터치
+            이벤트 중복, 네트워크 지연, 브라우저 재시도, 사용자의 새로고침까지
+            고려하면 결제 요청에는 idempotency key가 필요합니다. 프론트는 요청
+            생성 시 고유 key를 만들고 loading/disabled/중복 submit 방지를
+            적용하며, 실패와 처리 중 상태를 명확히 보여줍니다. 백엔드는 같은
+            key의 요청을 한 번만 처리하고 기존 결과를 반환해야 합니다. 이후
+            모바일 기기별 이벤트 로그와 중복 요청률을 계측해 재발을 봅니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>disabled 버튼만으로 막을 수 없는 케이스는?</li>
+            <li>idempotency key는 프론트와 백엔드 중 누가 만들면 좋나요?</li>
+            <li>요청은 실패했는데 실제 결제는 됐을 때 UX는?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-second-frontend";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Frontend Engineer
+
+[시나리오]
+모바일에서만 버튼이 두 번 눌려 결제가 중복됐다
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

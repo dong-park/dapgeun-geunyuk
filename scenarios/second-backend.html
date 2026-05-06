@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 캐시를 붙였더니 장애가 더 커졌다</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · Second Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>캐시를 붙였더니 장애가 더 커졌다</h1>
+      <p>
+        <span class="tag">Software</span><span class="tag">Backend</span
+        ><span class="tag">Cache</span><span class="tag">중급</span
+        ><span class="tag">12분</span>
+      </p>
+      <div class="box soft">
+        <strong>Backend Engineer 두 번째 링크</strong>
+        <p>
+          Backend Engineer의 두 번째 학습페이지입니다. 성능 개선 수단인 캐시가
+          장애 상황에서 어떻게 stampede, stale data, invalidation 문제를
+          만드는지 설명하는 연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          상품 상세 API가 느려져 Redis 캐시를 붙였습니다. 평소에는 응답 시간이
+          800ms에서 80ms로 줄었습니다. 그런데 인기 상품 세일 시작 직후 캐시
+          TTL이 동시에 만료되며 DB QPS가 20배로 튀고, 일부 사용자는 품절 상품을
+          구매 가능한 상태로 봤습니다. 면접관은 묻습니다. “캐시를 붙였는데 왜 더
+          위험해졌고, 어떻게 설계하겠습니까?”
+        </p>
+        <p>
+          <strong>질문:</strong> 캐시 성능 개선과 데이터 정합성 리스크를 어떻게
+          균형 있게 설명하겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 캐시 hit rate만 보지 않고 miss
+          폭주/stampede를 언급했다.</label
+        ><label
+          ><input type="checkbox" /> TTL, invalidation, stale data의 차이를
+          설명했다.</label
+        ><label
+          ><input type="checkbox" /> single-flight/lock/early refresh/jitter 중
+          하나 이상을 제시했다.</label
+        ><label
+          ><input type="checkbox" /> 재고/가격처럼 민감한 데이터와 일반 조회
+          데이터를 구분했다.</label
+        ><label
+          ><input type="checkbox" /> 장애 시 DB 보호와 사용자 UX fallback을
+          말했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>
+            Redis 캐시를 쓰면 DB 부하가 줄어들기 때문에 TTL을 길게 잡으면
+            됩니다.
+          </p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            캐시 만료가 동시에 몰리면 DB로 요청이 쏠릴 수 있으니 TTL에 jitter를
+            주고, 인기 키는 미리 갱신하겠습니다. 재고처럼 민감한 값은 캐시에만
+            의존하지 않겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            캐시는 평균 응답 시간을 줄이지만, 만료가 몰리면 cache stampede로
+            DB를 더 크게 때릴 수 있습니다. 그래서 TTL jitter,
+            stale-while-revalidate, single-flight, hot key prewarm을 조합해 miss
+            폭주를 줄이겠습니다. 또 상품 설명처럼 약간 stale해도 되는 데이터와
+            가격/재고처럼 민감한 데이터를 분리하고, 구매 가능 여부는 최종 주문
+            시점의 DB 조건부 검증으로 방어합니다. 지표는 hit rate뿐 아니라 miss
+            QPS, hot key, DB fallback, stale 응답 비율까지 보겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>TTL을 길게 잡는 것과 짧게 잡는 것의 tradeoff는?</li>
+            <li>캐시 invalidation이 어려운 이유를 예로 설명해보세요.</li>
+            <li>재고 값을 캐시해도 되는 경우와 안 되는 경우는?</li>
+            <li>Redis가 죽으면 서비스는 어떻게 동작해야 하나요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-second-backend";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Backend Engineer
+
+[시나리오]
+캐시를 붙였더니 장애가 더 커졌다
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>
