@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 결제 버튼을 더 눈에 띄게 했더니 CS가 늘었다</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · First Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>결제 버튼을 더 눈에 띄게 했더니 CS가 늘었다</h1>
+      <p>
+        <span class="tag">Design/UX</span><span class="tag">Checkout</span
+        ><span class="tag">중급</span><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>Designer / UX 첫 번째 링크</strong>
+        <p>
+          Designer / UX로 구독 신청했을 때 첫 번째로 보내는 학습페이지입니다.
+          전환율만 높이는 디자인이 아니라 신뢰, 이해, 장기 경험을 함께 설명하는
+          연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          결제 페이지에서 “구매하기” 버튼을 더 크게 만들고 상단 고정했습니다.
+          클릭률은 올랐지만 “실수로 결제했다”, “배송비를 못 봤다”는 CS가
+          늘었습니다. PM은 전환율 상승을 이유로 유지하자고 합니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 디자이너로서 이 문제를 어떻게 해석하고 다음
+          안을 제안하겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 전환율과 사용자 신뢰/오인지표를 함께
+          봤다.</label
+        ><label
+          ><input type="checkbox" /> 사용자가 놓친 정보 구조를 구체적으로
+          짚었다.</label
+        ><label
+          ><input type="checkbox" /> 비난보다 실험 설계와 근거로
+          논의했다.</label
+        ><label
+          ><input type="checkbox" /> 대안 디자인과 검증 지표를 제시했다.</label
+        ><label
+          ><input type="checkbox" /> 단기 KPI와 장기 브랜드/CS 비용의 tradeoff를
+          말했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>CS가 늘었으니 버튼을 다시 작게 만들겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            전환율은 올랐지만 배송비나 최종 금액 인지가 부족했을 수 있습니다.
+            버튼 주변에 핵심 비용 정보를 더 명확히 보여주고 다시
+            테스트하겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            이건 단순히 버튼 크기 문제가 아니라 사용자가 결제 전 최종 비용과
+            조건을 충분히 인지했는지의 문제입니다. 클릭률 상승만 보면 좋아
+            보이지만 오결제 CS, 환불률, 재구매 의향이 나빠지면 장기적으로
+            손해입니다. 버튼은 유지하더라도 최종 금액/배송비/취소 조건을 버튼
+            근처에 재배치하고, 확인 단계의 문구를 명확히 한 대안을
+            제안하겠습니다. 검증은 결제 전환율뿐 아니라 CS율, 환불률, 결제
+            취소율, 사용자 이해도 테스트로 보겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>PM이 “전환율이 올랐는데 왜 바꾸냐”고 하면?</li>
+            <li>dark pattern과 persuasive design의 경계는 어디인가요?</li>
+            <li>정성 usability test와 A/B test가 충돌하면?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-first-design";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Designer / UX
+
+[시나리오]
+결제 버튼을 더 눈에 띄게 했더니 CS가 늘었다
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

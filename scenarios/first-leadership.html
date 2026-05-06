@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 성과가 낮은 팀원을 도울 때, 어디까지 기다릴까?</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · First Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>성과가 낮은 팀원을 도울 때, 어디까지 기다릴까?</h1>
+      <p>
+        <span class="tag">Leadership</span><span class="tag">Coaching</span
+        ><span class="tag">중급</span><span class="tag">12분</span>
+      </p>
+      <div class="box soft">
+        <strong>Manager / Lead 첫 번째 링크</strong>
+        <p>
+          Manager / Lead로 구독 신청했을 때 첫 번째로 보내는 학습페이지입니다.
+          착한 조언이 아니라 기대치 정렬, 지원, 책임을 함께 말하는 리더십 답변을
+          연습합니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          팀원 A가 2개월째 핵심 작업을 늦게 마치고 리뷰 품질도 낮습니다. A는
+          열심히는 하지만 우선순위 판단이 약하고, 다른 팀원들은 “왜 계속
+          봐주냐”고 불만을 말하기 시작했습니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 리더로서 A를 어떻게 돕고, 팀 전체 신뢰를 어떻게
+          지키겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 사람 평가가 아니라 행동/기대치 기준으로
+          말했다.</label
+        ><label><input type="checkbox" /> 지원과 책임을 동시에 제시했다.</label
+        ><label
+          ><input type="checkbox" /> 구체적 피드백 주기와 체크포인트를
+          말했다.</label
+        ><label
+          ><input type="checkbox" /> 팀 전체 영향과 공정성을 고려했다.</label
+        ><label
+          ><input type="checkbox" /> 개선 실패 시 다음 조치도 회피하지
+          않았다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>1:1을 자주 하면서 동기부여를 해보겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            A와 기대 수준을 다시 맞추고, 작업을 작게 쪼개서 주간 체크포인트를
+            두겠습니다. 개선이 없으면 역할 조정도 고려하겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            먼저 A의 문제를 성격이 아니라 관찰 가능한 행동으로 정리하겠습니다.
+            예를 들어 일정 예측, 리뷰 품질, 우선순위 판단이 기대에 미치지
+            못한다는 식입니다. 1:1에서 기대 기준을 명확히 공유하고, 2~4주 동안
+            작은 단위 목표와 체크포인트, 페어링/리뷰 지원을 제공합니다. 동시에
+            팀에는 기준이 낮아진 것이 아니라 개선 계획을 운영 중임을 적절히
+            공유해 공정성을 지키겠습니다. 정해진 기간에도 개선이 없다면 역할
+            조정이나 성과 관리로 넘어가겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>팀원이 방어적으로 반응하면 어떻게 하나요?</li>
+            <li>개인 사정이 성과에 영향을 준다면 기준을 낮춰야 하나요?</li>
+            <li>팀에 어디까지 공유하는 게 적절한가요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-first-leadership";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Manager / Lead
+
+[시나리오]
+성과가 낮은 팀원을 도울 때, 어디까지 기다릴까?
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

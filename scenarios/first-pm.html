@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — 가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · First Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?</h1>
+      <p>
+        <span class="tag">PM</span><span class="tag">Activation</span
+        ><span class="tag">중급</span><span class="tag">12분</span>
+      </p>
+      <div class="box soft">
+        <strong>Product Manager 첫 번째 링크</strong>
+        <p>
+          PM으로 구독 신청했을 때 첫 번째로 보내는 학습페이지입니다. 지표 하락을
+          기능 아이디어가 아니라 진단 문제로 다루는 연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          신규 온보딩 개편 후 가입 완료율이 62%에서 44%로 떨어졌습니다. CEO는
+          “온보딩을 원복해야 하는 것 아니냐”고 묻고, 디자인팀은 “아직 학습
+          기간이 부족하다”고 말합니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 바로 원복할지, 더 볼지, 어떤 데이터를 확인할지
+          어떻게 답하겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 지표 정의와 측정 변경 가능성을 먼저
+          확인했다.</label
+        ><label
+          ><input type="checkbox" /> 세그먼트별 하락인지 전체 하락인지
+          나눴다.</label
+        ><label
+          ><input type="checkbox" /> 사용자 행동 funnel과 정성 신호를 함께
+          봤다.</label
+        ><label
+          ><input type="checkbox" /> 원복/부분 롤백/추가 실험의 tradeoff를
+          비교했다.</label
+        ><label
+          ><input type="checkbox" /> 의사결정 기준과 타임라인을 제시했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>완료율이 많이 떨어졌으니 일단 원복하고 다시 개선하겠습니다.</p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            먼저 어느 단계에서 이탈이 늘었는지 funnel을 보고, 특정 디바이스나
+            유입 채널에서만 떨어졌는지 확인한 뒤 원복 여부를 결정하겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            원복 여부를 결정하기 전에 지표 정의/이벤트 로깅 변경, 유입 mix 변화,
+            단계별 funnel, 세그먼트별 하락을 확인하겠습니다. 전체 핵심 지표가
+            유의미하게 악화되고 결제/활성까지 이어진다면 빠른 롤백이 맞지만,
+            특정 단계나 세그먼트 문제라면 부분 롤백이나 hotfix가 더 낫습니다.
+            동시에 세션 리플레이/문의/사용자 인터뷰로 왜 막혔는지 확인하고,
+            24~48시간 안에 “원복/부분 수정/실험 지속” 기준을 명확히
+            제안하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>CEO가 지금 당장 원복하자고 하면 어떻게 설득하나요?</li>
+            <li>정성 피드백 5개와 정량 지표가 충돌하면 뭘 우선하나요?</li>
+            <li>가입 완료율은 떨어졌지만 장기 retention은 올랐다면?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-first-pm";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Product Manager
+
+[시나리오]
+가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

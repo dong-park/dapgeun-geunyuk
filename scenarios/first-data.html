@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>답변근육 — A/B 테스트가 애매하게 이겼다면 출시해도 될까?</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · First Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>A/B 테스트가 애매하게 이겼다면 출시해도 될까?</h1>
+      <p>
+        <span class="tag">Data</span><span class="tag">Experiment</span
+        ><span class="tag">중급</span><span class="tag">12분</span>
+      </p>
+      <div class="box soft">
+        <strong>Data Analyst / Scientist 첫 번째 링크</strong>
+        <p>
+          Data Analyst / Scientist로 구독 신청했을 때 첫 번째로 보내는
+          학습페이지입니다. p-value만 말하지 않고 실험 품질과 비즈니스
+          의사결정을 연결하는 연습입니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          검색 결과 정렬 알고리즘 B가 CTR을 +1.2% 올렸지만 구매 전환은
+          -0.4%입니다. p-value는 CTR만 0.04이고, 세그먼트별로는 신규 유저에게만
+          효과가 큽니다. PM은 “유의하니까 출시하자”고 말합니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 데이터 담당자로서 출시 여부를 어떻게
+          판단하겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> primary metric과 guardrail metric을
+          구분했다.</label
+        ><label
+          ><input type="checkbox" /> 효과 크기와 p-value를 함께 해석했다.</label
+        ><label
+          ><input type="checkbox" /> 세그먼트 분석의 다중검정/사후분석 리스크를
+          언급했다.</label
+        ><label
+          ><input type="checkbox" /> 비즈니스 비용과 사용자 경험 영향을
+          연결했다.</label
+        ><label
+          ><input type="checkbox" /> 추가 실험/점진 rollout 기준을
+          제시했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>
+            p-value가 0.05보다 작으니 CTR은 유의하게 개선됐고 출시해도 됩니다.
+          </p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            CTR은 개선됐지만 구매 전환이 내려갔으니 바로 전체 출시는 위험합니다.
+            primary metric과 guardrail을 확인하고 신규 유저 세그먼트에
+            제한적으로 rollout하는 방안을 보겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            먼저 이 실험의 primary metric이 CTR인지 구매 전환인지, guardrail이
+            무엇인지 확인하겠습니다. CTR +1.2%가 통계적으로 유의해도 구매 전환
+            -0.4%가 비즈니스상 더 큰 손실일 수 있습니다. 신규 유저 효과는 사후
+            세그먼트 분석이면 과대해석 위험이 있으니, 가설을 명확히 해서
+            재실험하거나 신규 유저 대상 점진 rollout을 제안하겠습니다. 결론은
+            “유의하니 출시”가 아니라 효과 크기, guardrail, 세그먼트 신뢰도,
+            손익을 함께 본 의사결정입니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>
+              p-value와 confidence interval을 면접관에게 쉽게 설명해보세요.
+            </li>
+            <li>실험 기간 중 마케팅 캠페인이 시작됐다면 어떻게 하나요?</li>
+            <li>세그먼트 분석은 언제 신뢰할 수 있나요?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-first-data";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Data Analyst / Scientist
+
+[시나리오]
+A/B 테스트가 애매하게 이겼다면 출시해도 될까?
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

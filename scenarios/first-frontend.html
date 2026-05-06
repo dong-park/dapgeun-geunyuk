@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      답변근육 — 대시보드가 느려졌는데, 프론트 문제라고 단정해도 될까?
+    </title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">답변근육 · First Learning Page</p>
+      <a class="button" href="../index.html">← 구독 신청으로</a>
+      <h1>대시보드가 느려졌는데, 프론트 문제라고 단정해도 될까?</h1>
+      <p>
+        <span class="tag">Frontend</span><span class="tag">Performance</span
+        ><span class="tag">중급</span><span class="tag">10분</span>
+      </p>
+      <div class="box soft">
+        <strong>Frontend Engineer 첫 번째 링크</strong>
+        <p>
+          Frontend Engineer로 구독 신청했을 때 첫 번째로 보내는
+          학습페이지입니다. “느려요”를 렌더링/네트워크/API/데이터 크기 관점으로
+          분해하는 답변근육을 연습합니다.
+        </p>
+      </div>
+      <h2>1. 실제 상황</h2>
+      <div class="box">
+        <p>
+          B2B 관리자 대시보드 첫 화면 로딩이 2초에서 8초로 늘었습니다. PM은
+          “프론트 최적화 좀 해주세요”라고 말합니다. 그런데 최근 변경은 차트
+          라이브러리 교체, API 응답 필드 추가, 권한 체크 API 추가가 모두 섞여
+          있습니다.
+        </p>
+        <p>
+          <strong>질문:</strong> 어디서부터 확인하고, 어떤 순서로
+          개선하겠습니까?
+        </p>
+      </div>
+      <h2>2. 먼저 답해보기</h2>
+      <p>
+        아래에 먼저 자기 답변을 써보세요. 해설은 그 다음에 여는 게 좋습니다.
+      </p>
+      <textarea id="draft" placeholder="내 답변 초안..."></textarea>
+      <div class="btns">
+        <button onclick="saveDraft()">임시 저장</button
+        ><button onclick="copyFeedbackPrompt()">
+          내 답변 + 첨삭 프롬프트 복사</button
+        ><button class="primary" onclick="showAll()">해설 열기</button>
+      </div>
+      <h2>3. 자기 점검 Rubric</h2>
+      <div class="box">
+        <label
+          ><input type="checkbox" /> 느림을 LCP/TTFB/JS 실행/렌더링/API 시간으로
+          분해했다.</label
+        ><label
+          ><input type="checkbox" /> 브라우저 Performance/Network 탭과 RUM
+          지표를 함께 언급했다.</label
+        ><label
+          ><input type="checkbox" /> 프론트와 백엔드 책임을 성급히 단정하지
+          않았다.</label
+        ><label
+          ><input type="checkbox" /> 빠른 완화책과 구조 개선책을
+          구분했다.</label
+        ><label
+          ><input type="checkbox" /> 측정 기준과 재발 방지 모니터링을
+          말했다.</label
+        >
+      </div>
+      <section id="answers" class="answer-block">
+        <h2>4. 답변 비교</h2>
+        <div class="box bad">
+          <strong>약한 답변</strong>
+          <p>
+            React 렌더링이 느린 것 같아서 memo와 lazy loading을 적용하겠습니다.
+          </p>
+        </div>
+        <div class="box">
+          <strong>괜찮은 답변</strong>
+          <p>
+            먼저 Network와 Performance 탭으로 병목이 API인지 JS 번들인지
+            렌더링인지 나누겠습니다. 이후 번들 분리, 차트 lazy loading, API 필드
+            축소 같은 개선을 적용하겠습니다.
+          </p>
+        </div>
+        <div class="box good">
+          <strong>강한 답변</strong>
+          <p>
+            먼저 “느리다”를 TTFB, API latency, JS download/parse, render, chart
+            hydration으로 나눠 측정하겠습니다. 최근 변경이 여러 개이므로
+            Performance trace와 Network waterfall, 실제 사용자 RUM을 보고 병목을
+            특정합니다. 빠른 완화로는 above-the-fold 우선 렌더링, 차트 lazy
+            loading/skeleton, 불필요 필드 제거를 적용하고, 구조적으로는 API
+            집계/캐싱, 번들 budget, 성능 회귀 알림을 둡니다. 프론트 최적화만
+            말하지 않고 사용자 체감 지표와 재발 방지까지 연결하겠습니다.
+          </p>
+        </div>
+        <h2>5. 면접관 꼬리질문</h2>
+        <div class="box">
+          <ol>
+            <li>Lighthouse 점수가 좋은데 실제 사용자는 느리다면 뭘 보나요?</li>
+            <li>React memo를 남발하면 어떤 문제가 생기나요?</li>
+            <li>API가 느릴 때 프론트에서 할 수 있는 UX 완화책은?</li>
+          </ol>
+        </div>
+        <div class="btns">
+          <a class="button" href="../index.html#subscribe"
+            >내 프로필에 맞는 다음 링크 받기</a
+          ><button onclick="copyFeedbackPrompt()">첨삭 프롬프트 복사</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const key = "draft-first-frontend";
+      document.getElementById("draft").value = localStorage.getItem(key) || "";
+      function saveDraft() {
+        localStorage.setItem(key, document.getElementById("draft").value);
+        alert("브라우저에 임시 저장했어요.");
+      }
+      function showAll() {
+        document.getElementById("answers").classList.add("show");
+      }
+      function copyFeedbackPrompt() {
+        const t = document.getElementById("draft").value.trim();
+        const p = `아래 답변을 면접관 관점에서 첨삭해줘. 평가 기준은 문제 정의, 원인 후보, 트레이드오프, 실행 순서, 리스크, 말의 구조야.
+
+[페르소나]
+Frontend Engineer
+
+[시나리오]
+대시보드가 느려졌는데, 프론트 문제라고 단정해도 될까?
+
+[내 답변]
+${t}`;
+        navigator.clipboard.writeText(p);
+        alert("첨삭 프롬프트를 복사했어요.");
+      }
+    </script>
+  </body>
+</html>

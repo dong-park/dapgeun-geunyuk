@@ -210,7 +210,7 @@
         </div>
       </form>
       <section id="result" class="result box good">
-        <h2>첫 답변근육 링크 3개</h2>
+        <h2>내 페르소나 첫 번째 학습페이지</h2>
         <p id="reason"></p>
         <div id="links" class="scenario-list"></div>
         <h3>신청서 복사</h3>
@@ -236,17 +236,17 @@
         </div>
         <div class="card">
           <strong>다음 링크 요청</strong>
-          <p>첫 링크 후 사용자가 다음 링크를 원한다고 말하는가?</p>
+          <p>첫 학습페이지 후 사용자가 다음 링크를 원한다고 말하는가?</p>
         </div>
       </div>
     </main>
     <script>
       const scenarioMap = {
-        software: [
+        backend: [
           [
-            "DB와 이벤트가 갈라지는 순간",
-            "Transactional Outbox로 dual-write 문제를 설명하는 연습",
-            "./scenarios/software-outbox.html",
+            "Backend 첫 번째: 재고는 민감한데, 락 없이 큐로 처리한다면?",
+            "큐 기반 직렬화, 멱등성, DB 최종 방어선을 함께 설명하는 연습",
+            "./scenarios/first-backend.html",
           ],
           [
             "재고 1개에 주문 2개가 동시에 들어오면?",
@@ -254,16 +254,33 @@
             "./scenarios/stock-concurrency.html",
           ],
           [
+            "DB와 이벤트가 갈라지는 순간",
+            "Transactional Outbox로 dual-write 문제를 설명하는 연습",
+            "./scenarios/software-outbox.html",
+          ],
+        ],
+        frontend: [
+          [
+            "Frontend 첫 번째: 대시보드가 느려졌는데, 프론트 문제라고 단정해도 될까?",
+            "렌더링/API/번들/사용자 체감 지표를 분해하는 연습",
+            "./scenarios/first-frontend.html",
+          ],
+          [
             "느린 대시보드, 어디서부터 볼까?",
             "프론트엔드/백엔드 경계를 넘는 성능 진단 연습",
             "./scenarios/frontend-performance.html",
           ],
+          [
+            "가입 완료율이 18% 떨어졌다",
+            "제품 지표 하락을 funnel 관점으로 진단하는 연습",
+            "./scenarios/pm-activation-drop.html",
+          ],
         ],
         pm: [
           [
-            "가입 완료율이 18% 떨어졌다",
-            "원인 가설과 데이터 확인 순서를 구조화하는 연습",
-            "./scenarios/pm-activation-drop.html",
+            "PM 첫 번째: 가입 완료율이 18% 떨어졌다면, 첫 질문은 무엇인가?",
+            "원복/부분 수정/추가 실험을 판단하는 제품 사고 연습",
+            "./scenarios/first-pm.html",
           ],
           [
             "실험 결과가 애매할 때",
@@ -276,11 +293,62 @@
             "./scenarios/behavioral-stakeholder.html",
           ],
         ],
-        behavior: [
+        data: [
           [
-            "일정이 밀렸는데 이해관계자가 화났다",
-            "책임 인정, 범위 조정, 재발 방지까지 말하는 연습",
+            "Data 첫 번째: A/B 테스트가 애매하게 이겼다면 출시해도 될까?",
+            "p-value, guardrail, 세그먼트, 비즈니스 의사결정을 연결하는 연습",
+            "./scenarios/first-data.html",
+          ],
+          [
+            "실험 결과가 애매할 때",
+            "유의성/비즈니스 임팩트/의사결정 기준을 말하는 연습",
+            "./scenarios/data-abtest.html",
+          ],
+          [
+            "가입 완료율이 18% 떨어졌다",
+            "원인 가설과 데이터 확인 순서를 구조화하는 연습",
+            "./scenarios/pm-activation-drop.html",
+          ],
+        ],
+        design: [
+          [
+            "Design 첫 번째: 결제 버튼을 더 눈에 띄게 했더니 CS가 늘었다",
+            "전환율, 신뢰, 오인지표를 함께 보는 UX 판단 연습",
+            "./scenarios/first-design.html",
+          ],
+          [
+            "우선순위가 충돌할 때",
+            "이해관계자 조율과 tradeoff 설명 연습",
             "./scenarios/behavioral-stakeholder.html",
+          ],
+          [
+            "가입 완료율이 18% 떨어졌다",
+            "제품 지표 하락을 사용자 경험 관점으로 진단하는 연습",
+            "./scenarios/pm-activation-drop.html",
+          ],
+        ],
+        growth: [
+          [
+            "Growth 첫 번째: 광고 ROAS는 좋은데 실제 이익이 줄었다면?",
+            "ROAS와 incrementality, 마진, cannibalization을 구분하는 연습",
+            "./scenarios/first-growth.html",
+          ],
+          [
+            "가입 완료율이 18% 떨어졌다",
+            "원인 가설과 데이터 확인 순서를 구조화하는 연습",
+            "./scenarios/pm-activation-drop.html",
+          ],
+          [
+            "실험 결과가 애매할 때",
+            "유의성/비즈니스 임팩트/의사결정 기준을 말하는 연습",
+            "./scenarios/data-abtest.html",
+          ],
+        ],
+        leadership: [
+          [
+            "Leadership 첫 번째: 성과가 낮은 팀원을 도울 때, 어디까지 기다릴까?",
+            "기대치 정렬, 지원, 책임, 팀 공정성을 함께 말하는 연습",
+            "./scenarios/first-leadership.html",
           ],
           [
             "성과가 낮은 팀원을 어떻게 도울까?",
@@ -294,18 +362,43 @@
           ],
         ],
       };
-      function kind(role, weak) {
-        const r = (role + " " + weak).toLowerCase();
-        if (r.includes("pm") || r.includes("data") || r.includes("데이터"))
-          return "pm";
+      const trackLabel = {
+        backend: "Backend Engineering",
+        frontend: "Frontend Engineering",
+        pm: "Product Management",
+        data: "Data Analyst / Scientist",
+        design: "Design / UX",
+        growth: "Marketing / Growth",
+        leadership: "Behavioral / Leadership",
+      };
+      function kind(role, weak, target, notes) {
+        const r =
+          `${role} ${weak} ${target || ""} ${notes || ""}`.toLowerCase();
+        if (r.includes("designer") || r.includes("design") || r.includes("ux"))
+          return "design";
+        if (
+          r.includes("marketer") ||
+          r.includes("growth") ||
+          r.includes("marketing")
+        )
+          return "growth";
+        if (r.includes("data") || r.includes("데이터") || r.includes("분석"))
+          return "data";
+        if (r.includes("pm") || r.includes("product")) return "pm";
+        if (
+          r.includes("frontend") ||
+          r.includes("front-end") ||
+          r.includes("react")
+        )
+          return "frontend";
         if (
           r.includes("manager") ||
           r.includes("lead") ||
           r.includes("커뮤니케이션") ||
           r.includes("리더십")
         )
-          return "behavior";
-        return "software";
+          return "leadership";
+        return "backend";
       }
       function formData() {
         const f = document.getElementById("profileForm");
@@ -331,10 +424,10 @@
         e.preventDefault();
         const d = formData();
         localStorage.setItem("dapgeunProfile", JSON.stringify(d));
-        const k = kind(d.role, d.weakness.join(" "));
+        const k = kind(d.role, d.weakness.join(" "), d.target, d.notes);
         const links = scenarioMap[k];
         document.getElementById("reason").textContent =
-          `${d.name}님은 ${d.role} / ${d.years} / ${d.goal} 프로필이고, 약점으로 ${d.weakness.join(", ") || "구조화된 답변"}을 선택했습니다. 그래서 ${k === "pm" ? "Product·Data" : k === "behavior" ? "Behavioral·Leadership" : "Software"} 트랙 링크를 먼저 추천합니다.`;
+          `${d.name}님은 ${d.role} / ${d.years} / ${d.goal} 프로필이고, 약점으로 ${d.weakness.join(", ") || "구조화된 답변"}을 선택했습니다. 그래서 ${trackLabel[k]} 페르소나의 첫 번째 학습페이지를 맨 위에 배치했습니다.`;
         document.getElementById("links").innerHTML = links
           .map(
             (x) =>
