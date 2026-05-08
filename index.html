@@ -48,6 +48,37 @@
           </p>
         </div>
       </section>
+      <section class="routine-panel">
+        <div>
+          <p class="eyebrow">오늘의 답변 루틴</p>
+          <h2>하루 12분, 답변 하나를 끝까지 밀어붙입니다.</h2>
+          <p class="lead small">
+            답변근육은 많이 읽게 하지 않습니다. 내 상황에 맞는 질문 하나를
+            받고, 먼저 답하고, 더 나은 구조로 다시 말하게 만듭니다.
+          </p>
+        </div>
+        <div class="routine-steps">
+          <div class="step-card">
+            <span>01</span><strong>먼저 답변</strong>
+            <p>해설을 보기 전에 내 언어로 5분간 초안을 씁니다.</p>
+          </div>
+          <div class="step-card">
+            <span>02</span><strong>구조 비교</strong>
+            <p>약한 답변/괜찮은 답변/강한 답변을 비교합니다.</p>
+          </div>
+          <div class="step-card">
+            <span>03</span><strong>꼬리질문</strong>
+            <p>면접관의 압박 질문까지 이어서 답변 밀도를 올립니다.</p>
+          </div>
+        </div>
+      </section>
+      <section id="continueBox" class="box accent continue-box">
+        <strong>이어서 훈련하기</strong>
+        <p id="continueText" class="muted">
+          아직 저장된 초안이 없습니다. 샘플 링크에서 첫 답변을 작성해보세요.
+        </p>
+        <div id="continueLinks" class="scenario-list compact"></div>
+      </section>
       <h2>왜 그냥 블로그가 아닌가?</h2>
       <div class="grid">
         <div class="card">
@@ -224,6 +255,24 @@
           링크가 정기 발송됩니다.
         </p>
       </section>
+      <h2>구독은 이렇게 운영합니다</h2>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <span class="tag">MVP</span>
+          <strong>주 3회 맞춤 링크</strong>
+          <p>프로필/약점/최근 답변을 기준으로 다음 시나리오를 골라 보냅니다.</p>
+        </div>
+        <div class="price-card highlight">
+          <span class="tag">Core</span>
+          <strong>답변 첨삭 프롬프트</strong>
+          <p>내 초안을 복사해 AI 코치에게 바로 첨삭받을 수 있는 프롬프트를 제공합니다.</p>
+        </div>
+        <div class="price-card">
+          <span class="tag">Next</span>
+          <strong>주간 약점 리포트</strong>
+          <p>반복해서 약한 답변 습관과 다음 훈련 루틴을 정리합니다.</p>
+        </div>
+      </div>
       <h2>초기 검증 기준</h2>
       <div class="grid">
         <div class="card">
@@ -371,6 +420,53 @@
         growth: "Marketing / Growth",
         leadership: "Behavioral / Leadership",
       };
+      const draftMeta = {
+        "draft-first-backend": ["Backend 1라운드: 락 없이 큐로 처리한다면?", "./scenarios/first-backend.html"],
+        "draft-second-backend": ["Backend 2라운드: 압박 꼬리질문", "./scenarios/second-backend.html"],
+        "draft-first-frontend": ["Frontend 1라운드: 느린 대시보드 진단", "./scenarios/first-frontend.html"],
+        "draft-second-frontend": ["Frontend 2라운드: 압박 꼬리질문", "./scenarios/second-frontend.html"],
+        "draft-first-pm": ["PM 1라운드: 가입 완료율 18% 하락", "./scenarios/first-pm.html"],
+        "draft-second-pm": ["PM 2라운드: 압박 꼬리질문", "./scenarios/second-pm.html"],
+        "draft-first-data": ["Data 1라운드: A/B 테스트 출시 판단", "./scenarios/first-data.html"],
+        "draft-second-data": ["Data 2라운드: 압박 꼬리질문", "./scenarios/second-data.html"],
+        "draft-first-design": ["Design 1라운드: 버튼 변경과 CS 증가", "./scenarios/first-design.html"],
+        "draft-second-design": ["Design 2라운드: 압박 꼬리질문", "./scenarios/second-design.html"],
+        "draft-first-growth": ["Growth 1라운드: ROAS와 이익의 충돌", "./scenarios/first-growth.html"],
+        "draft-second-growth": ["Growth 2라운드: 압박 꼬리질문", "./scenarios/second-growth.html"],
+        "draft-first-leadership": ["Leadership 1라운드: 성과 낮은 팀원 코칭", "./scenarios/first-leadership.html"],
+        "draft-second-leadership": ["Leadership 2라운드: 압박 꼬리질문", "./scenarios/second-leadership.html"],
+        "draft-software-outbox": ["DB와 이벤트가 갈라지는 순간", "./scenarios/software-outbox.html"],
+        "draft-stock-concurrency": ["재고 1개에 주문 2개가 동시에 들어오면?", "./scenarios/stock-concurrency.html"],
+        "draft-frontend-performance": ["느린 대시보드, 어디서부터 볼까?", "./scenarios/frontend-performance.html"],
+        "draft-pm-activation-drop": ["가입 완료율이 18% 떨어졌다", "./scenarios/pm-activation-drop.html"],
+        "draft-data-abtest": ["실험 결과가 애매할 때", "./scenarios/data-abtest.html"],
+        "draft-behavioral-stakeholder": ["우선순위가 충돌할 때", "./scenarios/behavioral-stakeholder.html"],
+        "draft-leadership-coaching": ["성과가 낮은 팀원을 어떻게 도울까?", "./scenarios/leadership-coaching.html"],
+        "draft-behavioral-failure": ["실패한 프로젝트를 설명하라", "./scenarios/behavioral-failure.html"],
+      };
+      function renderContinueBox() {
+        const saved = Object.entries(draftMeta)
+          .map(([key, meta]) => ({ key, title: meta[0], href: meta[1], text: localStorage.getItem(key) || "" }))
+          .filter((x) => x.text.trim().length > 0)
+          .sort((a, b) => b.text.length - a.text.length)
+          .slice(0, 3);
+        const profile = localStorage.getItem("dapgeunProfile");
+        if (!saved.length && !profile) return;
+        const box = document.getElementById("continueBox");
+        const text = document.getElementById("continueText");
+        const links = document.getElementById("continueLinks");
+        box.classList.add("show");
+        if (saved.length) {
+          const chars = saved.reduce((sum, x) => sum + x.text.trim().length, 0);
+          text.textContent = `브라우저에 저장된 답변 초안 ${saved.length}개, 총 ${chars}자를 찾았습니다. 이어서 답변을 다듬어보세요.`;
+          links.innerHTML = saved
+            .map((x) => `<a class="scenario-link" href="${x.href}"><strong>${x.title}</strong><br/><span class="muted">저장된 초안 ${x.text.trim().length}자 · 이어쓰기</span></a>`)
+            .join("");
+        } else {
+          text.textContent = "저장된 프로필이 있습니다. 다시 추천 링크를 만들거나 샘플 링크에서 첫 답변을 작성해보세요.";
+        }
+      }
+      renderContinueBox();
       function kind(role, weak, target, notes) {
         const r =
           `${role} ${weak} ${target || ""} ${notes || ""}`.toLowerCase();
