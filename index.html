@@ -229,8 +229,9 @@
         <section id="result" class="result-card">
           <div>
             <p class="eyebrow">Your first routine</p>
-            <h2>첫 3개 훈련 링크</h2>
+            <h2 id="routineHeadline">에이전트가 만드는 첫 루틴</h2>
             <p id="reason"></p>
+            <p id="coachNote" class="coach-note"></p>
           </div>
           <div id="links" class="scenario-list"></div>
           <div class="payload-box">
@@ -245,44 +246,6 @@
     </main>
 
     <script>
-      const scenarioMap = {
-        backend: [
-          ["Backend 1라운드: 락 없이 큐로 처리한다면?", "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.", "./scenarios/first-backend.html"],
-          ["DB와 이벤트가 갈라지는 순간", "Transactional Outbox로 dual-write 문제를 설명하는 보조 연습", "./scenarios/software-outbox.html"],
-          ["재고 1개에 주문 2개가 동시에 들어오면?", "락/조건부 업데이트/큐 기반 직렬화를 비교하는 보조 연습", "./scenarios/stock-concurrency.html"],
-        ],
-        frontend: [
-          ["Frontend 1라운드: 느린 대시보드 진단", "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.", "./scenarios/first-frontend.html"],
-          ["느린 대시보드, 어디서부터 볼까?", "프론트엔드/백엔드 경계를 넘는 성능 진단 보조 연습", "./scenarios/frontend-performance.html"],
-          ["가입 완료율이 18% 떨어졌다", "제품 지표 하락을 funnel 관점으로 진단하는 보조 연습", "./scenarios/pm-activation-drop.html"],
-        ],
-        pm: [
-          ["PM 1라운드: 가입 완료율이 18% 떨어졌다면?", "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.", "./scenarios/first-pm.html"],
-          ["실험 결과가 애매할 때", "유의성/비즈니스 임팩트/의사결정 기준을 말하는 보조 연습", "./scenarios/data-abtest.html"],
-          ["우선순위가 충돌할 때", "이해관계자 조율과 tradeoff 설명 보조 연습", "./scenarios/behavioral-stakeholder.html"],
-        ],
-        data: [
-          ["Data 1라운드: A/B 테스트가 애매하게 이겼다면?", "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.", "./scenarios/first-data.html"],
-          ["실험 결과가 애매할 때", "유의성/비즈니스 임팩트/의사결정 기준을 말하는 보조 연습", "./scenarios/data-abtest.html"],
-          ["가입 완료율이 18% 떨어졌다", "원인 가설과 데이터 확인 순서를 구조화하는 보조 연습", "./scenarios/pm-activation-drop.html"],
-        ],
-        design: [
-          ["Design 1라운드: 버튼 변경과 CS 증가", "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.", "./scenarios/first-design.html"],
-          ["우선순위가 충돌할 때", "이해관계자 조율과 tradeoff 설명 보조 연습", "./scenarios/behavioral-stakeholder.html"],
-          ["가입 완료율이 18% 떨어졌다", "제품 지표 하락을 사용자 경험 관점으로 진단하는 보조 연습", "./scenarios/pm-activation-drop.html"],
-        ],
-        growth: [
-          ["Growth 1라운드: ROAS는 좋은데 실제 이익이 줄었다면?", "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.", "./scenarios/first-growth.html"],
-          ["가입 완료율이 18% 떨어졌다", "원인 가설과 데이터 확인 순서를 구조화하는 보조 연습", "./scenarios/pm-activation-drop.html"],
-          ["실험 결과가 애매할 때", "유의성/비즈니스 임팩트/의사결정 기준을 말하는 보조 연습", "./scenarios/data-abtest.html"],
-        ],
-        leadership: [
-          ["Leadership 1라운드: 성과가 낮은 팀원을 도울 때", "응시 후 같은 시나리오의 2라운드 압박 질문으로 이어집니다.", "./scenarios/first-leadership.html"],
-          ["성과가 낮은 팀원을 어떻게 도울까?", "리더십/코칭/기대치 정렬 보조 연습", "./scenarios/leadership-coaching.html"],
-          ["실패한 프로젝트를 설명하라", "회고를 변명이 아니라 학습으로 말하는 보조 연습", "./scenarios/behavioral-failure.html"],
-        ],
-      };
-      const trackLabel = { backend: "Backend", frontend: "Frontend", pm: "PM", data: "Data", design: "Design", growth: "Growth", leadership: "Leadership" };
       const draftMeta = {
         "draft-first-backend": ["Backend 1라운드", "./scenarios/first-backend.html"],
         "draft-second-backend": ["Backend 2라운드", "./scenarios/second-backend.html"],
@@ -326,15 +289,14 @@
           .join("");
       }
 
-      function kind(role, weak, target, notes) {
-        const r = `${role} ${weak} ${target || ""} ${notes || ""}`.toLowerCase();
-        if (r.includes("designer") || r.includes("design") || r.includes("ux")) return "design";
-        if (r.includes("marketer") || r.includes("growth") || r.includes("marketing")) return "growth";
-        if (r.includes("data") || r.includes("데이터") || r.includes("분석")) return "data";
-        if (r.includes("pm") || r.includes("product")) return "pm";
-        if (r.includes("frontend") || r.includes("front-end") || r.includes("react")) return "frontend";
-        if (r.includes("manager") || r.includes("lead") || r.includes("커뮤니케이션") || r.includes("리더십")) return "leadership";
-        return "backend";
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
       }
 
       function formData() {
@@ -348,18 +310,57 @@
         };
       }
 
-      document.getElementById("profileForm").addEventListener("submit", (e) => {
+      async function requestAgentRoutine(profile) {
+        const response = await fetch("/api/routine", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(profile),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) {
+          throw new Error(data.message || "루틴 생성에 실패했습니다.");
+        }
+        return data.routine;
+      }
+
+      function renderRoutine(routine, profile) {
+        document.getElementById("routineHeadline").textContent = routine.headline || "에이전트가 만든 첫 루틴";
+        document.getElementById("reason").textContent = routine.reason || "프로필 기반으로 첫 훈련 링크를 생성했습니다.";
+        document.getElementById("coachNote").textContent = routine.coachNote || "";
+        document.getElementById("links").innerHTML = (routine.items || [])
+          .map((x) => `<a class="scenario-link" href="${escapeHtml(x.href)}"><strong>${escapeHtml(x.title)}</strong><span>${escapeHtml(x.description || x.reason)}</span>${x.reason ? `<em>${escapeHtml(x.reason)}</em>` : ""}</a>`)
+          .join("");
+        const payload = JSON.stringify({ profile, routine }, null, 2);
+        document.getElementById("payload").value = payload;
+        document.getElementById("mailLink").href = "mailto:?subject=" + encodeURIComponent("[답변근육] 에이전트 루틴") + "&body=" + encodeURIComponent(payload);
+      }
+
+      document.getElementById("profileForm").addEventListener("submit", async (e) => {
         e.preventDefault();
+        const submitButton = e.currentTarget.querySelector('button[type="submit"]');
+        const originalLabel = submitButton.textContent;
         const d = formData();
         localStorage.setItem("dapgeunProfile", JSON.stringify(d));
-        const k = kind(d.role, d.weakness.join(" "), d.target, d.notes);
-        document.getElementById("reason").textContent = `${d.name}님 프로필은 ${d.role} / ${d.years} / ${d.goal}입니다. ${trackLabel[k]} 트랙에서 지금 가장 답변 밀도를 올리기 좋은 3개 링크를 골랐습니다.`;
-        document.getElementById("links").innerHTML = scenarioMap[k].map((x) => `<a class="scenario-link" href="${x[2]}"><strong>${x[0]}</strong><span>${x[1]}</span></a>`).join("");
-        const payload = JSON.stringify(d, null, 2);
-        document.getElementById("payload").value = payload;
-        document.getElementById("mailLink").href = "mailto:?subject=" + encodeURIComponent("[답변근육] 구독 신청") + "&body=" + encodeURIComponent(payload);
         document.getElementById("result").classList.add("show");
+        document.getElementById("routineHeadline").textContent = "에이전트가 루틴을 생성하고 있습니다";
+        document.getElementById("reason").textContent = "프로필을 실제 에이전트에게 보내 개인화된 첫 훈련 순서를 만들고 있습니다.";
+        document.getElementById("coachNote").textContent = "잠시만 기다려주세요. 보통 10~40초 정도 걸립니다.";
+        document.getElementById("links").innerHTML = "";
+        document.getElementById("payload").value = JSON.stringify(d, null, 2);
         document.getElementById("result").scrollIntoView({ behavior: "smooth", block: "start" });
+        submitButton.disabled = true;
+        submitButton.textContent = "에이전트 생성 중...";
+        try {
+          const routine = await requestAgentRoutine(d);
+          renderRoutine(routine, d);
+        } catch (err) {
+          document.getElementById("routineHeadline").textContent = "루틴 생성에 실패했습니다";
+          document.getElementById("reason").textContent = err.message || "에이전트 응답을 받지 못했습니다. 잠시 후 다시 시도해주세요.";
+          document.getElementById("coachNote").textContent = "정적 목업으로 대체하지 않고, 실제 에이전트 응답이 실패하면 실패 상태를 보여줍니다.";
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = originalLabel;
+        }
       });
 
       function copyPayload() {

@@ -575,10 +575,30 @@ fieldset {
   font-size: 1.02rem;
 }
 .scenario-link span {
+  display: block;
   color: var(--muted);
   font-size: 0.92rem;
 }
+.scenario-link em {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255,255,255,.72);
+  font-size: 0.9rem;
+  font-style: normal;
+}
 .result-card .scenario-link span { color: rgba(255,255,255,.58); }
+.coach-note {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 16px;
+  background: rgba(255,255,255,.08);
+}
+button:disabled {
+  opacity: 0.62;
+  cursor: wait;
+  transform: none !important;
+}
 .payload-box textarea { min-height: 150px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.82rem; }
 .result-card .payload-box textarea { background: rgba(255,255,255,.08); color: #fff; border-color: var(--dark-line); }
 .result-card .secondary { color: #fff; border-color: rgba(255,255,255,.24); }
