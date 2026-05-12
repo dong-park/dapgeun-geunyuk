@@ -5,9 +5,13 @@
   "description": "답변근육 product landing and agent-backed routine API",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js"
+    "check": "node --check server.js && node --check db.js && node --check curation.js && node --check scripts/send-due.js && node --test test/*.test.js",
+    "send:due": "node scripts/send-due.js"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.9.0"
   }
 }

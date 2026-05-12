@@ -2,6 +2,8 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 const { spawn } = require('node:child_process');
+const db = require('./db');
+const { buildDeliveryQueueItems } = require('./curation');
 
 const ROOT = __dirname;
 const PORT = Number(process.env.PORT || 8088);
@@ -9,6 +11,8 @@ const HOST = process.env.HOST || '127.0.0.1';
 const HERMES_BIN = process.env.HERMES_BIN || '/home/dongpark/.local/bin/hermes';
 const AGENT_TIMEOUT_MS = Number(process.env.AGENT_TIMEOUT_MS || 90000);
 const MAX_BODY_BYTES = 32 * 1024;
+const PUBLIC_BASE_URL = process.env.PUBLIC_BASE_URL || 'https://dapgeun.dongpark.dev';
+const conn = db.init(db.openDatabase());
 
 const scenarioCatalog = {
   backend: [
@@ -223,22 +227,96 @@ function runAgent(prompt) {
 }
 
 async function handleRoutine(req, res) {
+  let user = null;
+  let profileRow = null;
   try {
     const raw = JSON.parse(await readBody(req) || '{}');
     const profile = normalizeProfile(raw);
+    user = db.upsertUser(conn, profile);
+    profileRow = db.addProfile(conn, user.id, profile);
+    db.addEvent(conn, user.id, 'profile_submitted', { profileId: profileRow.id, source: 'landing' });
+
     const track = inferTrack(profile);
     const prompt = buildPrompt(profile, track);
     const agentText = await runAgent(prompt);
     const agentJson = extractJson(agentText);
     const routine = validateRoutine(agentJson, profile, track);
-    sendJson(res, 200, { ok: true, routine });
+    const routineRow = db.saveRoutine(conn, {
+      userId: user.id,
+      profileId: profileRow.id,
+      source: 'landing',
+      routine,
+      agentPrompt: prompt,
+      agentResponse: agentText,
+    });
+    const queued = db.seedDeliveryQueue(conn, {
+      userId: user.id,
+      profileId: profileRow.id,
+      routineId: routineRow.id,
+      routine,
+      cadence: profile.cadence,
+      channel: profile.channel,
+      baseUrl: PUBLIC_BASE_URL,
+    });
+    db.addEvent(conn, user.id, 'routine_generated', { profileId: profileRow.id, routineId: routineRow.id, queuedCount: queued.length });
+    sendJson(res, 200, { ok: true, userId: user.id, profileId: profileRow.id, routineId: routineRow.id, queuedCount: queued.length, routine });
   } catch (err) {
     console.error('[routine-api]', err);
+    if (user) db.addEvent(conn, user.id, 'routine_failed', { profileId: profileRow && profileRow.id, error: String(err.message || err).slice(0, 400) });
     sendJson(res, err.statusCode || 502, {
       ok: false,
       error: 'AGENT_ROUTINE_FAILED',
       message: '루틴 생성 에이전트 응답을 받지 못했습니다. 잠시 후 다시 시도해주세요.',
     });
+  }
+}
+
+function isAdmin(req) {
+  const token = process.env.ADMIN_TOKEN;
+  if (!token) return false;
+  const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  return req.headers['x-admin-token'] === token || url.searchParams.get('token') === token;
+}
+
+function requireAdmin(req, res) {
+  if (!process.env.ADMIN_TOKEN) {
+    sendJson(res, 503, { ok: false, error: 'ADMIN_TOKEN_NOT_CONFIGURED' });
+    return false;
+  }
+  if (!isAdmin(req)) {
+    sendJson(res, 401, { ok: false, error: 'UNAUTHORIZED' });
+    return false;
+  }
+  return true;
+}
+
+async function handleAdminGenerateQueue(req, res) {
+  if (!requireAdmin(req, res)) return;
+  try {
+    const raw = JSON.parse(await readBody(req) || '{}');
+    const days = Math.max(1, Math.min(Number(raw.days || 7), 30));
+    const profile = conn.prepare('select * from profiles where id = ?').get(raw.profileId);
+    if (!profile) {
+      sendJson(res, 404, { ok: false, error: 'PROFILE_NOT_FOUND' });
+      return;
+    }
+    const routineRow = conn.prepare('select * from routines where profile_id = ? order by created_at desc limit 1').get(profile.id);
+    if (!routineRow) {
+      sendJson(res, 404, { ok: false, error: 'ROUTINE_NOT_FOUND' });
+      return;
+    }
+    const profileInput = { cadence: profile.cadence, channel: profile.channel };
+    const routine = { items: JSON.parse(routineRow.items_json || '[]') };
+    const items = buildDeliveryQueueItems(profileInput, routine, days, {
+      userId: profile.user_id,
+      profileId: profile.id,
+      routineId: routineRow.id,
+      baseUrl: PUBLIC_BASE_URL,
+    }).map((item) => db.insertDeliveryQueueItem(conn, item));
+    sendJson(res, 200, { ok: true, queuedCount: items.length, items });
+  } catch (err) {
+    console.error('[admin-generate-queue]', err);
+    sendJson(res, 500, { ok: false, error: 'GENERATE_QUEUE_FAILED' });
   }
 }
 
@@ -267,11 +345,21 @@ function serveStatic(req, res) {
 }
 
 const server = http.createServer((req, res) => {
-  if (req.method === 'GET' && req.url === '/api/health') {
-    sendJson(res, 200, { ok: true, service: 'dapgeun-geunyuk', agent: 'hermes' });
+  const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  if (req.method === 'GET' && url.pathname === '/api/health') {
+    sendJson(res, 200, { ok: true, service: 'dapgeun-geunyuk', agent: 'hermes', db: true });
     return;
   }
-  if (req.method === 'POST' && req.url === '/api/routine') {
+  if (req.method === 'GET' && url.pathname === '/api/admin/leads') {
+    if (!requireAdmin(req, res)) return;
+    sendJson(res, 200, { ok: true, leads: db.adminLeads(conn, { limit: Number(url.searchParams.get('limit') || 50) }) });
+    return;
+  }
+  if (req.method === 'POST' && url.pathname === '/api/admin/generate-queue') {
+    handleAdminGenerateQueue(req, res);
+    return;
+  }
+  if (req.method === 'POST' && url.pathname === '/api/routine') {
     handleRoutine(req, res);
     return;
   }

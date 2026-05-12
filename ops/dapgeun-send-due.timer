@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Dapgeun Geunyuk learning sheet delivery every morning
+
+[Timer]
+OnCalendar=*-*-* 08:00:00
+Persistent=true
+Unit=dapgeun-send-due.service
+
+[Install]
+WantedBy=timers.target

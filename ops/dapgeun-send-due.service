@@ -1,0 +1,10 @@
+[Unit]
+Description=Dapgeun Geunyuk send due learning sheets
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/dongpark/dapgeun-geunyuk
+Environment=NODE_ENV=production
+Environment=DRY_RUN_DELIVERY=true
+Environment=PATH=/home/dongpark/.nvm/versions/node/v22.11.0/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/dongpark/.nvm/versions/node/v22.11.0/bin/npm run send:due
