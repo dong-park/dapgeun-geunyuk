@@ -162,106 +162,130 @@
           </div>
         </div>
 
-        <form id="profileForm" class="profile-form onboarding-form">
-          <section class="setup-step">
-            <div class="step-heading">
-              <span>01</span>
+        <form id="profileForm" class="profile-form chat-onboarding" aria-label="답변근육 채팅 온보딩">
+          <div class="chat-header">
+            <div class="chat-agent">
+              <span class="agent-avatar">답</span>
               <div>
-                <h3>누구의 루틴인가요?</h3>
-                <p>이름과 받을 곳만 있으면 첫 루틴을 저장할 수 있어요.</p>
+                <strong>답변근육 코치</strong>
+                <p>첫 루틴 생성을 위해 네 가지만 물어볼게요.</p>
               </div>
             </div>
-            <div class="field-grid two compact-fields">
-              <label>이름 or 닉네임<input name="name" placeholder="예: 동팍" required /></label>
-              <label>이메일 or 연락처<input name="contact" placeholder="예: hello@example.com" required /></label>
-            </div>
-          </section>
+            <span class="chat-status">online</span>
+          </div>
 
-          <section class="setup-step">
-            <div class="step-heading">
-              <span>02</span>
-              <div>
-                <h3>어떤 면접을 준비하나요?</h3>
-                <p>직무, 연차, 목적이 시나리오 난이도를 결정합니다.</p>
+          <div class="chat-thread">
+            <section class="chat-turn agent-turn" data-chat-step="1">
+              <div class="bubble agent-bubble">
+                안녕하세요. 먼저 루틴을 저장할 이름과 받을 곳을 알려주세요.
               </div>
-            </div>
-            <div class="field-grid two">
-              <label>현재 직무
-                <select name="role">
-                  <option>Backend Engineer</option>
-                  <option>Frontend Engineer</option>
-                  <option>Full-stack Engineer</option>
-                  <option>PM</option>
-                  <option>Data Analyst / Scientist</option>
-                  <option>Designer / UX</option>
-                  <option>Marketer / Growth</option>
-                  <option>Manager / Lead</option>
-                  <option>Other</option>
-                </select>
-              </label>
-              <label>목표 직무<input name="target" placeholder="예: B2C PM, 시니어 백엔드" /></label>
-            </div>
-            <div class="field-grid three">
-              <label>경력 연차
-                <select name="years">
-                  <option>0~1년</option><option>1~3년</option><option>3~5년</option><option>5~8년</option><option>8년+</option>
-                </select>
-              </label>
-              <label>난이도
-                <select name="level"><option>입문</option><option selected>중급</option><option>고급</option></select>
-              </label>
-              <label>목적
-                <select name="goal"><option>이직 준비</option><option>승진/레벨업</option><option>직무 전환</option><option>실무 역량 강화</option><option>인터뷰 감각 유지</option></select>
-              </label>
-            </div>
-          </section>
+            </section>
+            <section class="chat-turn user-turn" data-chat-step="1">
+              <div class="bubble user-bubble input-bubble">
+                <div class="field-grid two compact-fields">
+                  <label>이름 or 닉네임<input name="name" placeholder="예: 동팍" required /></label>
+                  <label>이메일 or 연락처<input name="contact" placeholder="예: hello@example.com" required /></label>
+                </div>
+                <button type="button" class="chat-next" data-next-step="2">다음</button>
+              </div>
+            </section>
 
-          <section class="setup-step">
-            <div class="step-heading">
-              <span>03</span>
-              <div>
-                <h3>지금 고치고 싶은 답변 습관</h3>
-                <p>여러 개를 골라도 됩니다. 첫 학습지의 코칭 포인트가 됩니다.</p>
+            <section class="chat-turn agent-turn" data-chat-step="2">
+              <div class="bubble agent-bubble">
+                지금 어떤 면접을 준비 중인가요? 직무와 난이도에 맞춰 첫 시나리오를 고를게요.
               </div>
-            </div>
-            <fieldset>
-              <legend class="sr-only">지금 가장 약한 답변 습관</legend>
-              <div class="checks answer-habits">
-                <label><input type="checkbox" name="weakness" value="문제 진단" /><span>문제 진단</span></label>
-                <label><input type="checkbox" name="weakness" value="트레이드오프 비교" /><span>트레이드오프 비교</span></label>
-                <label><input type="checkbox" name="weakness" value="구조화된 답변" /><span>구조화된 답변</span></label>
-                <label><input type="checkbox" name="weakness" value="데이터 해석" /><span>데이터 해석</span></label>
-                <label><input type="checkbox" name="weakness" value="커뮤니케이션" /><span>커뮤니케이션</span></label>
-                <label><input type="checkbox" name="weakness" value="운영/실무 리스크" /><span>운영/실무 리스크</span></label>
-                <label><input type="checkbox" name="weakness" value="리더십 사례 정리" /><span>리더십 사례 정리</span></label>
+            </section>
+            <section class="chat-turn user-turn" data-chat-step="2">
+              <div class="bubble user-bubble input-bubble">
+                <div class="field-grid two">
+                  <label>현재 직무
+                    <select name="role">
+                      <option>Backend Engineer</option>
+                      <option>Frontend Engineer</option>
+                      <option>Full-stack Engineer</option>
+                      <option>PM</option>
+                      <option>Data Analyst / Scientist</option>
+                      <option>Designer / UX</option>
+                      <option>Marketer / Growth</option>
+                      <option>Manager / Lead</option>
+                      <option>Other</option>
+                    </select>
+                  </label>
+                  <label>목표 직무<input name="target" placeholder="예: B2C PM, 시니어 백엔드" /></label>
+                </div>
+                <div class="field-grid three">
+                  <label>경력 연차
+                    <select name="years">
+                      <option>0~1년</option><option>1~3년</option><option>3~5년</option><option>5~8년</option><option>8년+</option>
+                    </select>
+                  </label>
+                  <label>난이도
+                    <select name="level"><option>입문</option><option selected>중급</option><option>고급</option></select>
+                  </label>
+                  <label>목적
+                    <select name="goal"><option>이직 준비</option><option>승진/레벨업</option><option>직무 전환</option><option>실무 역량 강화</option><option>인터뷰 감각 유지</option></select>
+                  </label>
+                </div>
+                <button type="button" class="chat-next" data-next-step="3">다음</button>
               </div>
-            </fieldset>
-          </section>
+            </section>
 
-          <section class="setup-step final-step">
-            <div class="step-heading">
-              <span>04</span>
-              <div>
-                <h3>받는 리듬을 정해요.</h3>
-                <p>지금은 루틴과 큐를 저장하고, 실제 발송은 설정된 채널로 이어집니다.</p>
+            <section class="chat-turn agent-turn" data-chat-step="3">
+              <div class="bubble agent-bubble">
+                답변할 때 가장 자주 무너지는 부분은 어디인가요? 여러 개 골라도 괜찮아요.
               </div>
-            </div>
-            <div class="field-grid two">
-              <label>희망 빈도
-                <select name="cadence"><option>주 1회</option><option selected>주 3회</option><option>매일</option></select>
-              </label>
-              <label>선호 수신 채널
-                <select name="channel"><option>이메일</option><option>카카오/문자</option><option>텔레그램</option><option>링크만 직접 확인</option></select>
-              </label>
-            </div>
-            <label>최근 막혔던 질문 or 관심 주제
-              <textarea name="notes" placeholder="예: 지표가 떨어졌을 때 어디서부터 봐야 하는지 답변이 약해요."></textarea>
-            </label>
-            <div class="form-actions onboarding-actions">
-              <button type="submit" class="primary">첫 루틴 생성</button>
-              <button type="button" onclick="fillSample()">샘플 입력</button>
-            </div>
-          </section>
+            </section>
+            <section class="chat-turn user-turn" data-chat-step="3">
+              <div class="bubble user-bubble input-bubble">
+                <fieldset>
+                  <legend class="sr-only">지금 가장 약한 답변 습관</legend>
+                  <div class="checks answer-habits chat-choices">
+                    <label><input type="checkbox" name="weakness" value="문제 진단" /><span>문제 진단</span></label>
+                    <label><input type="checkbox" name="weakness" value="트레이드오프 비교" /><span>트레이드오프 비교</span></label>
+                    <label><input type="checkbox" name="weakness" value="구조화된 답변" /><span>구조화된 답변</span></label>
+                    <label><input type="checkbox" name="weakness" value="데이터 해석" /><span>데이터 해석</span></label>
+                    <label><input type="checkbox" name="weakness" value="커뮤니케이션" /><span>커뮤니케이션</span></label>
+                    <label><input type="checkbox" name="weakness" value="운영/실무 리스크" /><span>운영/실무 리스크</span></label>
+                    <label><input type="checkbox" name="weakness" value="리더십 사례 정리" /><span>리더십 사례 정리</span></label>
+                  </div>
+                </fieldset>
+                <button type="button" class="chat-next" data-next-step="4">다음</button>
+              </div>
+            </section>
+
+            <section class="chat-turn agent-turn" data-chat-step="4">
+              <div class="bubble agent-bubble">
+                마지막으로, 학습지를 어느 리듬으로 받을지와 최근 막혔던 질문을 남겨주세요.
+              </div>
+            </section>
+            <section class="chat-turn user-turn" data-chat-step="4">
+              <div class="bubble user-bubble input-bubble">
+                <div class="field-grid two">
+                  <label>희망 빈도
+                    <select name="cadence"><option>주 1회</option><option selected>주 3회</option><option>매일</option></select>
+                  </label>
+                  <label>선호 수신 채널
+                    <select name="channel"><option>이메일</option><option>카카오/문자</option><option>텔레그램</option><option>링크만 직접 확인</option></select>
+                  </label>
+                </div>
+                <label>최근 막혔던 질문 or 관심 주제
+                  <textarea name="notes" placeholder="예: 지표가 떨어졌을 때 어디서부터 봐야 하는지 답변이 약해요."></textarea>
+                </label>
+                <button type="button" class="chat-next" data-next-step="5">준비 완료</button>
+              </div>
+            </section>
+
+            <section class="chat-turn agent-turn final-chat-turn" data-chat-step="5">
+              <div class="bubble agent-bubble">
+                좋아요. 누르면 실제 에이전트가 첫 루틴을 만들고 DB에 저장한 뒤, 발송 큐까지 준비합니다.
+              </div>
+            </section>
+          </div>
+
+          <div class="chat-composer onboarding-actions">
+            <button type="submit" class="primary">첫 루틴 생성</button>
+            <button type="button" onclick="fillSample()">샘플 입력</button>
+          </div>
         </form>
 
         <section id="result" class="result-card">
@@ -418,6 +442,29 @@
         f.querySelectorAll("input[name=weakness]").forEach((x) => (x.checked = ["문제 진단", "데이터 해석", "구조화된 답변"].includes(x.value)));
         f.notes.value = "지표가 떨어졌을 때 가설을 넓게 세우고 검증 순서를 말하는 답변이 약합니다.";
       }
+
+      function initChatOnboarding() {
+        const form = document.getElementById("profileForm");
+        if (!form || !form.classList.contains("chat-onboarding")) return;
+        form.classList.add("js-chat");
+        const turns = [...form.querySelectorAll("[data-chat-step]")];
+        const composer = form.querySelector(".chat-composer");
+        const showStep = (step) => {
+          turns.forEach((turn) => {
+            const turnStep = Number(turn.dataset.chatStep || "1");
+            turn.classList.toggle("visible", turnStep <= step);
+          });
+          form.classList.toggle("chat-ready", step >= 5);
+          const last = [...turns].reverse().find((turn) => Number(turn.dataset.chatStep || "1") <= step);
+          if (last && step > 1) last.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        };
+        form.querySelectorAll(".chat-next").forEach((button) => {
+          button.addEventListener("click", () => showStep(Number(button.dataset.nextStep || "1")));
+        });
+        showStep(1);
+      }
+
+      initChatOnboarding();
 
       renderContinueBox();
     </script>
