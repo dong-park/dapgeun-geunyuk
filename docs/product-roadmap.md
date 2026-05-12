@@ -37,10 +37,14 @@
 
 ## Phase 2 — 가벼운 서버/저장
 
-- 프로필 제출 저장: Supabase/Firebase/Google Sheet 중 하나
+상세 구현 계획: [`docs/delivery-system-plan.md`](./delivery-system-plan.md)
+
+- 프로필 제출 저장: 1차는 서버 내 SQLite, 이후 Supabase/Postgres로 이전 가능하게 설계
+- 에이전트가 생성한 루틴과 첫 3개 학습지를 DB에 저장
+- `delivery_queue` 기반으로 매일/주 3회 큐레이션 학습지 발송
 - 답변 시작/해설 열기/복사 클릭 이벤트 저장
-- 관리자용 신청자 리스트
-- 수동 발송용 템플릿 생성
+- 관리자용 신청자/큐/실패 로그 조회 API
+- 메일 발송은 Resend/SMTP adapter, 메시지는 Telegram adapter로 단계적 확장
 
 ## Phase 3 — 개인화 루프
 
